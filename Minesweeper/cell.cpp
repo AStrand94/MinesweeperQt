@@ -21,26 +21,22 @@ Cell::~Cell()
 void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QRectF rec = boundingRect();
-    QBrush *brush;
+    QBrush brush;
     if(marked){
-        brush = new QBrush(Qt::yellow);
+        brush = QBrush(Qt::yellow);
     }else if(isPressed){
         if(bomb){
-            brush = new QBrush(Qt::darkRed);
+            brush = QBrush(Qt::darkRed);
         }else{
-            brush = new QBrush(Qt::white);
+            brush = QBrush(Qt::white);
         }
     }else{
-        brush = new QBrush(Qt::darkGray);
+        brush = QBrush(Qt::darkGray);
     }
 
-    painter->fillRect(rec,*brush);
-
-    delete brush;
-
+    painter->fillRect(rec,brush);
 
     painter->drawRect(boundingRect());
-
 
 }
 
