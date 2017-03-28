@@ -9,11 +9,8 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,
     this->scene = scene;
     this->bombs = bombs;
     this->rows = rows;
-    cols = columns;
+    this->cols = columns;
     this->size = cellsize;
-    qInfo() << size  << "size";
-    qInfo() << "rows: " << rows << " cols: " << cols;
-
     createGrid();
     setBombs(bombs);
     setNeighbourBombs();
@@ -26,6 +23,19 @@ MineSweeper::~MineSweeper()
 
 }
 
+void MineSweeper::firstIsPressed(Cell *cell)
+{
+    if(cell->isBomb()  || cell->getBombs() > 0){
+        setCellBombsToZero(cell);
+    }
+
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < cols; j++){
+            grid[i][j]->firstPress = false;
+        }
+    }
+}
+
 void MineSweeper::deleteGrid(){
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
@@ -33,6 +43,38 @@ void MineSweeper::deleteGrid(){
         }
         delete[] grid[i];
     }
+}
+
+void MineSweeper::setCellBombsToZero(Cell *cell)
+{
+
+    Cell **informs = cell->getInforms();
+    if(cell->isBomb()){
+        cell->setNotBomb();
+        while(true){
+            int x = rand()%rows, y = rand()%cols;
+            if(!cell->isNeighbour(grid[x][y])){
+                grid[x][y]->setBomb();
+                break;
+            }
+        }
+    }
+
+    for(int i = 0; i < 8; i++){
+        if(informs[i]->isBomb()){
+            informs[i]->setNotBomb();
+            while(true){
+                int x = rand()%rows, y = rand()%cols;
+                if(!cell->isNeighbour(grid[x][y])){
+                    grid[x][y]->setBomb();
+                    break;
+                }
+            }
+        }
+    }
+
+    setNeighbourBombs();
+
 }
 
 void MineSweeper::createGrid()
@@ -44,7 +86,7 @@ void MineSweeper::createGrid()
     for(int i = 0; i < rows; i++){
         grid[i] = new Cell*[cols];
         for(int j = 0; j < cols; j++){
-            grid[i][j] = new Cell(size);
+            grid[i][j] = new Cell(size,this);
             grid[i][j]->setPos(i*size,j*size);
             scene->addItem(grid[i][j]);
         }

@@ -8,12 +8,15 @@
 #include <QRectF>
 #include <QGraphicsLayoutItem>
 #include <QPainter>
+
 using namespace std;
+
+class MineSweeper;
 
 class Cell : public QGraphicsItem, public QGraphicsLayoutItem
 {
 public:
-    Cell(int size);
+    Cell(int size,MineSweeper*);
     ~Cell();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget *widget);
     QRectF boundingRect() const;
@@ -24,7 +27,13 @@ public:
     void setInforms(Cell **informs);
     void reveal();
     void setBomb();
+    int getBombs();
     void setBombsReference(Cell**,int);
+    bool firstPress = true;
+    Cell **getInforms();
+    void setNotBomb();
+    bool isNeighbour(Cell*);
+
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
@@ -44,6 +53,7 @@ private:
     void revealAllBombs();
     QGraphicsTextItem text;
     bool marked = false;
+    MineSweeper *game;
 
 };
 

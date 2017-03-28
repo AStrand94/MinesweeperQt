@@ -54,7 +54,7 @@ void MainWindow::on_clearButton_clicked()
         if(list.at(1) == s){
             cols = 24;
             rows = 24;
-            bombs = 65;
+            bombs = 500;
             size = 25;
         }else if(list.at(0) == s){
             cols = 15;

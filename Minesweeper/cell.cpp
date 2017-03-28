@@ -2,9 +2,11 @@
 #include <iostream>
 #include <QGraphicsSceneMouseEvent>
 #include <QMessageBox>
+#include <minesweeper.h>
 
 
-Cell::Cell(int size){
+Cell::Cell(int size,MineSweeper* game){
+    this->game = game;
     this->size = size;
 }
 
@@ -123,18 +125,41 @@ void Cell::setBomb()
     bomb = true;
 }
 
+int Cell::getBombs()
+{
+    return bombs;
+}
+
 void Cell::setBombsReference(Cell **bombref, int size)
 {
     this->allBombs = bombref;
     this->bombSize = size;
 }
 
+Cell **Cell::getInforms()
+{
+    return informs;
+}
 
+void Cell::setNotBomb()
+{
+    bomb = false;
+}
+
+bool Cell::isNeighbour(Cell *cell)
+{
+    for(int i = 0; i < 8; i++) if(informs[i] == cell) return true;
+    return false;
+}
 
 void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
 {
+    bool right = e->button() == Qt::RightButton;
+    if(firstPress && !right){
+        game->firstIsPressed(this);
+    }
 
-    if(e->button() == Qt::RightButton) {
+    if(right) {
         if(!isPressed){
             marked = !marked;
             update();
