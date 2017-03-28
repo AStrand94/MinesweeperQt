@@ -16,23 +16,26 @@ class MineSweeper;
 class Cell : public QGraphicsItem, public QGraphicsLayoutItem
 {
 public:
-    Cell(int size,MineSweeper*);
+    Cell(int size);
     ~Cell();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget *widget);
     QRectF boundingRect() const;
     QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const;
-    void setGeometry(const QRectF &r);
-    bool isBomb();
+   // void setGeometry(const QRectF &r);
+    bool isItBomb();
     void setBombs(int b);
-    void setInforms(Cell **informs);
+    void setNeighbours(Cell **neighbours);
     void reveal();
     void setBomb();
     int getBombs();
     void setBombsReference(Cell**,int);
     bool firstPress = true;
-    Cell **getInforms();
+    Cell **getNeighbours();
     void setNotBomb();
     bool isNeighbour(Cell*);
+    void setParent(MineSweeper *);
+    void drawText();
+    void incrementNeighboursBombcount();
 
 
 protected:
@@ -42,19 +45,20 @@ protected:
 private:
     int i,size;
     int test = 0;
-    int bombs = 0;
-    bool bomb = false;
+    int surroundingBombs = 0;
+    bool isBomb = false;
     bool isPressed = false;
     //QGraphicsTextItem *text;
-    Cell **informs;
-    void informNext();
+    Cell **neighbours;
+    void revealNeighbours();
     Cell **allBombs;
     int bombSize;
-    void revealAllBombs();
+
     QGraphicsTextItem text;
     bool marked = false;
-    MineSweeper *game;
+    MineSweeper* game;
 
+    void mark();
 };
 
 #endif // RECTITEMTEST_H

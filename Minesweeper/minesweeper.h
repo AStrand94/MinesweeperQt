@@ -10,25 +10,22 @@
 class MineSweeper
 {
 public:
-    MineSweeper(QGraphicsScene*,int bombs, int rows, int columns, int cellsize);
+    MineSweeper(QGraphicsScene*,int bombCount, int rows, int columns);
     ~MineSweeper();
     void firstIsPressed(Cell*);
-
+    void revealeAllBombs();
 
 private:
     QGraphicsScene *scene;
-    int bombs, rows, cols, size;
-    void createGrid();
+    int bombCount, rows, cols, size = 15;
+    void createBlankGrid();
     Cell ***grid;
-    void setBombs(int x);
     Cell ** allBombs;
     void setNeighbourBombs();
-    void setInform();
-    int getBombs(int x, int y);
+    void setNeighbours();
     void deleteGrid();
     void clearBombs();
-    void setCellBombsToZero(Cell*);
-
+    void setBombsAround(Cell* cell);
 
 };
 

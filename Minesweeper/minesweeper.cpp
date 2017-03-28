@@ -2,33 +2,36 @@
 #include "minesweeper.h"
 #include "cell.h"
 
-MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns, int cellsize)
+MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns)
 {
     //if(bombs > rows*columns)   --->>> THROW EXCEPTION
     if(bombs > rows*columns) bombs = rows*columns -1;
     this->scene = scene;
-    this->bombs = bombs;
+    this->bombCount = bombs;
     this->rows = rows;
     this->cols = columns;
-    this->size = cellsize;
-    createGrid();
-    setBombs(bombs);
-    setNeighbourBombs();
-    setInform();
+    //this->size = cellsize;
+    createBlankGrid();
+    setNeighbours();
+    qDebug() << "Game created";
+    qDebug() << "rows " << rows;
+    qDebug() << "cols " << columns;
+    qDebug() << "bombs" << bombs;
+
+
 }
 
 MineSweeper::~MineSweeper()
 {
     scene = NULL;
-
 }
 
 void MineSweeper::firstIsPressed(Cell *cell)
 {
-    if(cell->isBomb()  || cell->getBombs() > 0){
-        setCellBombsToZero(cell);
-    }
+    qDebug() << "setting surroudning bombs";
+    setBombsAround(cell);
 
+    qDebug() << "Test";
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
             grid[i][j]->firstPress = false;
@@ -45,142 +48,60 @@ void MineSweeper::deleteGrid(){
     }
 }
 
-void MineSweeper::setCellBombsToZero(Cell *cell)
+
+void MineSweeper::createBlankGrid()
 {
-
-    Cell **informs = cell->getInforms();
-    if(cell->isBomb()){
-        cell->setNotBomb();
-        while(true){
-            int x = rand()%rows, y = rand()%cols;
-            if(!cell->isNeighbour(grid[x][y])){
-                grid[x][y]->setBomb();
-                break;
-            }
-        }
-    }
-
-    for(int i = 0; i < 8; i++){
-        if(informs[i]->isBomb()){
-            informs[i]->setNotBomb();
-            while(true){
-                int x = rand()%rows, y = rand()%cols;
-                if(!cell->isNeighbour(grid[x][y])){
-                    grid[x][y]->setBomb();
-                    break;
-                }
-            }
-        }
-    }
-
-    setNeighbourBombs();
-
-}
-
-void MineSweeper::createGrid()
-{
-
-
     grid = new Cell**[rows];
 
     for(int i = 0; i < rows; i++){
         grid[i] = new Cell*[cols];
         for(int j = 0; j < cols; j++){
-            grid[i][j] = new Cell(size,this);
+            grid[i][j] = new Cell(size);
             grid[i][j]->setPos(i*size,j*size);
+
+            grid[i][j]->setParent(this);
+
             scene->addItem(grid[i][j]);
         }
     }
+    //grid[0][0]->setParent(this);
 }
 
-void MineSweeper::setBombs(int x)
+void MineSweeper::setBombsAround(Cell* cell)
 {
-    allBombs = new Cell*[x];
+
+    qDebug() << "before";
+    bombCount++;
+    qDebug() << "After";
+
+    allBombs = new Cell*[bombCount];
+
     int bombIndex = 0;
-    int temp = x;
+
     srand((unsigned int)time(0));
 
-    while(temp != 0){
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < cols; j++){
-                if(rand() % 30 == 0 && !grid[i][j]->isBomb()){
-                    grid[i][j]->setBomb();
-                    allBombs[bombIndex++] = grid[i][j];
-                    grid[i][j]->setBombsReference(allBombs,x);
-                    temp--;
-                    if(temp == 0) break;
-                }
-             }
-            if(temp == 0) break;
+
+    qDebug() << "Entering while loop";
+    while(bombIndex < bombCount){
+
+        int x = rand() % rows;
+        int y = rand() % cols;
+
+        if(!grid[x][y]->isNeighbour(cell) && grid[x][y] != cell){
+            grid[x][y]->setBomb();
+            grid[x][y]->incrementNeighboursBombcount();
+           allBombs[bombIndex++] = grid[x][y];
         }
     }
 }
 
-void MineSweeper::setNeighbourBombs()
-{
-    for(int i = 0; i < rows; i++){
-        for(int j = 0; j < cols; j++){
-            grid[i][j]->setBombs(getBombs(i,j));
-        }
+void MineSweeper::revealeAllBombs(){
+    for(int i = 0; i < bombCount; i++){
+        allBombs[i]->reveal();
     }
 }
 
-int MineSweeper::getBombs(int x, int y)
-{
-    int bombs=0;
-
-    if(x != 0){
-        if(grid[x-1][y]->isBomb()){
-            bombs++;
-        }
-    }
-
-    if(x!=0 && y!=0){
-        if(grid[x-1][y-1]->isBomb()){
-            bombs++;
-        }
-    }
-
-    if(y != 0){
-        if(grid[x][y-1]->isBomb()){
-            bombs++;
-        }
-    }
-
-    if(x != (rows-1)){
-        if(grid[x+1][y]->isBomb()){
-            bombs++;
-        }
-    }
-
-    if(y != (cols-1)){
-        if(grid[x][y+1]->isBomb()){
-            bombs++;
-        }
-    }
-
-    if(x != (rows-1) && y != (cols-1)){
-        if(grid[x+1][y+1]->isBomb()){
-            bombs++;
-        }
-    }
-
-    if(x != 0 && y != (cols-1)){
-        if(grid[x-1][y+1]->isBomb()){
-            bombs++;
-        }
-    }
-
-    if(x != (rows-1) && y != 0){
-        if(grid[x+1][y-1]->isBomb()){
-            bombs++;
-        }
-    }
-
-    return bombs;
-}
-
-void MineSweeper::setInform()
+void MineSweeper::setNeighbours()
 {
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
@@ -226,7 +147,7 @@ void MineSweeper::setInform()
             else
                 inf[7] = NULL;
 
-            grid[i][j]->setInforms(inf);
+            grid[i][j]->setNeighbours(inf);
 
         }
     }

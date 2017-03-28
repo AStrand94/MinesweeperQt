@@ -33,6 +33,7 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     MineSweeper *game;
+    void createNewGame(int width, int height, int bombs);
 };
 
 #endif // MAINWINDOW_H

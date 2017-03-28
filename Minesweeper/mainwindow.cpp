@@ -22,17 +22,18 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
 
-    int width = ui->graphicsView->width();
-    int height = ui->graphicsView->height();
     ui->graphicsView->setScene(scene);
-    bombs = 65;
-    size = 25;
 
-    rows = width/size;
-    cols = width/size;
+    bombs = 60;
+
     qInfo() << cols;
 
-    game = new MineSweeper(scene, bombs,rows,cols,size);
+    createNewGame(25, 25, bombs);
+}
+
+void MainWindow::createNewGame(int cols, int rows, int bombs){
+    delete game;
+    game = new MineSweeper(scene, bombs, rows, cols);
 }
 
 MainWindow::~MainWindow()
@@ -54,22 +55,21 @@ void MainWindow::on_clearButton_clicked()
         if(list.at(1) == s){
             cols = 24;
             rows = 24;
-            bombs = 500;
-            size = 25;
+            bombs = 50;
+
         }else if(list.at(0) == s){
             cols = 15;
             rows = 15;
             bombs = 20;
-            size = 40;
+
         }else{
             cols = 50;
             rows = 50;
             bombs = 350;
-            size = 12;
+
         }
     }
 
     scene->clear();
-    delete game;
-    game = new MineSweeper(scene,bombs,rows,cols,size);
+    createNewGame(cols, rows, bombs);
 }

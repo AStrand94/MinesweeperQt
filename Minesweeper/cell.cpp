@@ -5,14 +5,13 @@
 #include <minesweeper.h>
 
 
-Cell::Cell(int size,MineSweeper* game){
-    this->game = game;
+Cell::Cell(int size){
     this->size = size;
 }
 
 Cell::~Cell()
 {
-    delete[] informs;
+    delete[] neighbours;
     //delete text;
     //text = NULL;
     //delete[] allBombs;
@@ -25,7 +24,7 @@ void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     if(marked){
         brush = QBrush(Qt::yellow);
     }else if(isPressed){
-        if(bomb){
+        if(isBomb){
             brush = QBrush(Qt::darkRed);
         }else{
             brush = QBrush(Qt::white);
@@ -45,58 +44,63 @@ QRectF Cell::boundingRect() const{
     return QRectF(0,0,size,size);
 }
 
+void Cell::setParent(MineSweeper* p){
+    game = p;
+}
+
 QSizeF Cell::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
 {
     return boundingRect().size();
 }
 
-void Cell::setGeometry(const QRectF &r)
+/*void Cell::setGeometry(const QRectF &r)
 {
     prepareGeometryChange();
     QGraphicsLayoutItem::setGeometry(r);
     setPos(r.topLeft());
-}
+}*/
 
-bool Cell::isBomb(){
-    return bomb;
+bool Cell::isItBomb(){
+    return isBomb;
 }
 
 void Cell::setBombs(int b)
 {
-    bombs = b;
+    surroundingBombs = b;
 }
 
-void Cell::setInforms(Cell **informs)
+void Cell::setNeighbours(Cell **informs)
 {
-    this->informs = informs;
+    this->neighbours = informs;
 }
 
-void Cell::informNext(){
-    isPressed = true;
-    reveal();
-    update();
-    if(bombs == 0){
+void Cell::revealNeighbours(){
         for(int i = 0; i < 8; i++){
-            if(informs[i] != NULL)
-                if( !informs[i]->isPressed)
-                    informs[i]->informNext();
+            if(neighbours[i] != NULL)
+                if( !neighbours[i]->isPressed)
+                    neighbours[i]->reveal();
+        }
+
+}
+
+void Cell::incrementNeighboursBombcount(){
+    for(int i = 0; i < 8; i++){
+        if(neighbours[i] != NULL){
+            neighbours[i]->surroundingBombs++;
         }
     }
 }
 
-void Cell::revealAllBombs()
-{
-    for(int i = 0; i < bombSize; i++) allBombs[i]->reveal();
-}
 
-void Cell::reveal(){
+
+void Cell::drawText(){
     double scaleSize;
     if(size == 25) scaleSize = 1.0;
     else if(size == 40) scaleSize = 1.3;
     else scaleSize = 0.5;
 
 
-    if(bomb){
+    if(isBomb){
 
         text.setPlainText("B");
         text.setScale(scaleSize);
@@ -104,9 +108,9 @@ void Cell::reveal(){
         text.setParentItem(this);
 
         text.show();
-    }else if(bombs > 0){
+    }else if(surroundingBombs > 0){
 
-        text.setPlainText(QString::number(bombs));
+        text.setPlainText(QString::number(surroundingBombs));
         text.setScale(scaleSize);
         text.setPos(0,0);
         text.setParentItem(this);
@@ -118,12 +122,12 @@ void Cell::reveal(){
 
 void Cell::setBomb()
 {
-    bomb = true;
+    isBomb = true;
 }
 
 int Cell::getBombs()
 {
-    return bombs;
+    return surroundingBombs;
 }
 
 void Cell::setBombsReference(Cell **bombref, int size)
@@ -132,45 +136,58 @@ void Cell::setBombsReference(Cell **bombref, int size)
     this->bombSize = size;
 }
 
-Cell **Cell::getInforms()
+Cell **Cell::getNeighbours()
 {
-    return informs;
+    return neighbours;
 }
 
 void Cell::setNotBomb()
 {
-    bomb = false;
+    isBomb = false;
 }
 
 bool Cell::isNeighbour(Cell *cell)
 {
-    for(int i = 0; i < 8; i++) if(informs[i] == cell) return true;
+    for(int i = 0; i < 8; i++) if(neighbours[i] == cell) return true;
     return false;
+}
+
+void Cell::mark()
+{
+    if(!isPressed){
+        marked = !marked;
+        update();
+    }
+}
+
+void Cell::reveal()
+{
+    if(!isPressed && !marked){
+        isPressed = true;
+        if(isItBomb()){
+            game->revealeAllBombs();
+            qDebug() << "revealing";
+        }else{
+            if(surroundingBombs == 0) revealNeighbours();
+            drawText();
+        }
+    }
+    update();
 }
 
 void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
 {
     bool right = e->button() == Qt::RightButton;
     if(firstPress && !right){
+        qDebug() << "First klick :D";
         game->firstIsPressed(this);
     }
 
+    qDebug() << "finally";
     if(right) {
-        if(!isPressed){
-            marked = !marked;
-            update();
-        }
+        mark();
     }else{
-        if(!isPressed && !marked){
-            if(isBomb()){
-                revealAllBombs();
-            }else{
-
-                if(bombs == 0) informNext();
-                isPressed = true;
-                reveal();
-            }
-        }
+        reveal();
     }
     QGraphicsItem::mousePressEvent(e);
 
