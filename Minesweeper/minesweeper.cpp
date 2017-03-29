@@ -5,10 +5,12 @@
 
 MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns)
 {
-    //if(bombs > rows*columns)   --->>> THROW EXCEPTION
+    //if(bombs > rows*columns)   --->>> THROW EXCEPTION??
     if(bombs > rows*columns) bombs = rows*columns -1;
     this->scene = scene;
     this->bombCount = bombs;
+    //allBombs = new Cell*[bombCount];
+    allBombs = 0;
     this->rows = rows;
     this->cols = columns;
     //this->size = cellsize;
@@ -50,8 +52,11 @@ void MineSweeper::deleteGrid(){
 
     for(int i = 0; i < rows; i++) delete[] grid[i];
 
-    delete grid;
-    delete allBombs;
+    delete[] grid;
+    if(allBombs != nullptr){
+        delete[] allBombs;
+        allBombs = NULL;
+    }
 }
 
 
@@ -92,11 +97,12 @@ void MineSweeper::setBombsAround(Cell* cell)
 
         if(!grid[x][y]->isNeighbour(cell) && grid[x][y] != cell){
             grid[x][y]->setBomb();
+            qDebug() << "Incrementing: " << x << ", " << y;
             grid[x][y]->incrementNeighboursBombcount();
-           allBombs[bombIndex++] = grid[x][y];
+            allBombs[bombIndex++] = grid[x][y];
         }
     }
-        qDebug() << "Exiting loop that could take forever :D";
+    qDebug() << "Exiting loop that could take forever :D";
 }
 
 void MineSweeper::revealeAllBombs(){
@@ -106,7 +112,6 @@ void MineSweeper::revealeAllBombs(){
             allBombs[i]->reveal();
         }
     }
-
 }
 
 void MineSweeper::setNeighbours()

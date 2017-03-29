@@ -49,7 +49,11 @@ void MainWindow::on_clearButton_clicked()
     list.append("Hard");
     bool accepted = false;
 
-    QString s = QInputDialog::getItem(0,"TEST","Label:",list,0,false,&accepted);
+    QString s = QInputDialog::getItem(0,"TEST","Label:",list,-1,false,&accepted);
+
+    qDebug() << "THE s is: " << s;
+
+    if(s == "") return;
 
     if(list.indexOf(s) > -1){
         if(list.at(1) == s){
@@ -65,7 +69,7 @@ void MainWindow::on_clearButton_clicked()
         }else{
             cols = 50;
             rows = 50;
-            bombs = 350;
+            bombs = 500;
 
         }
     }
