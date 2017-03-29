@@ -54,8 +54,10 @@ void MainWindow::on_clearButton_clicked()
     bool accepted = false;
 
     QString s = QInputDialog::getItem(0,"TEST","Label:",list,-1,false,&accepted);
+    Difficulty d = HARD;
 
     qDebug() << "THE s is: " << s;
+    qDebug() << "THE difficulty is: " << d;
 
     if(s == "") return;
 

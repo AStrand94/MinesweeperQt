@@ -30,6 +30,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     minesweeper.h \
-    cell.h
+    cell.h \
+    difficulty.h
 
 FORMS    += mainwindow.ui

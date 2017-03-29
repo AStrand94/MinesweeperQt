@@ -9,8 +9,8 @@
 #include <QGraphicsLayoutItem>
 #include <QPainter>
 
-using namespace std;
 
+using namespace std;
 class MineSweeper;
 
 class Cell : public QGraphicsItem, public QGraphicsLayoutItem
@@ -35,6 +35,7 @@ public:
     void setGame(MineSweeper *);
     void drawText();
     void incrementNeighboursBombcount();
+    void countNeighbours();
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);

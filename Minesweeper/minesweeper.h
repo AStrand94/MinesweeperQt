@@ -6,8 +6,12 @@
 #include <QGraphicsScene>
 #include <exception>
 #include "cell.h"
+
 class MainWindow;
 
+#include "difficulty.h"
+
+using namespace diff;
 class MineSweeper
 {
 public:
@@ -28,6 +32,7 @@ private:
     void setBombsAround(Cell* cell);
     bool isBombsRevealed = false;
     MainWindow* mainWindow;
+    Difficulty difficulty;
 
 };
 
