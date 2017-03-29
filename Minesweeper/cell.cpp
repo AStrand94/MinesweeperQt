@@ -161,10 +161,9 @@ void Cell::reveal()
         if(isItBomb()){
             game->revealeAllBombs();
         }else if(surroundingBombs == 0) revealNeighbours();
-
+        drawText();
     }
     update();
-    drawText();
 }
 
 void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
@@ -177,7 +176,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
 
     if(right) {
         mark();
-    }else{
+    }else if(!marked){
         reveal();
     }
     QGraphicsItem::mousePressEvent(e);
