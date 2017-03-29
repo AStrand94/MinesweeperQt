@@ -90,6 +90,5 @@ void MainWindow::updateTimer(){
 }
 
 void MainWindow::displayTime(int time){
-    qDebug()<<time;
     ui->lcdNumber->display(time);
 }

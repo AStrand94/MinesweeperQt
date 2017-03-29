@@ -6,18 +6,19 @@
 #include <QGraphicsScene>
 #include <exception>
 #include "cell.h"
+class MainWindow;
 
 class MineSweeper
 {
 public:
-    MineSweeper(QGraphicsScene*,int bombCount, int rows, int columns);
+    MineSweeper(QGraphicsScene*,int bombCount, int rows, int columns, MainWindow* mainWindow);
     ~MineSweeper();
     void firstIsPressed(Cell*);
     void revealeAllBombs();
 
 private:
     QGraphicsScene *scene;
-    int bombCount, rows, cols, size = 15;
+    int bombCount, rows, cols, size = 25;
     void createBlankGrid();
     Cell ***grid;
     Cell ** allBombs;
@@ -25,6 +26,7 @@ private:
     void deleteGrid();
     void setBombsAround(Cell* cell);
     bool isBombsRevealed = false;
+    MainWindow* mainWindow;
 
 };
 

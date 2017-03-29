@@ -23,9 +23,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void startTime();
 
 private slots:
-
+    void updateTimer();
     void on_clearButton_clicked();
 
 private:
@@ -34,6 +35,9 @@ private:
     QGraphicsScene *scene;
     MineSweeper *game;
     void createNewGame(int width, int height, int bombs);
+     QTimer* timer;
+     int seconds;
+     void displayTime(int time);
 };
 
 #endif // MAINWINDOW_H

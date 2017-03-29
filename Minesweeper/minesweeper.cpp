@@ -2,8 +2,9 @@
 #include "minesweeper.h"
 #include "cell.h"
 #include <ctime>
+#include <mainwindow.h>
 
-MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns)
+MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns, MainWindow* mainWindow)
 {
     //if(bombs > rows*columns)   --->>> THROW EXCEPTION??
     if(bombs > rows*columns) bombs = rows*columns -1;
@@ -13,6 +14,7 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns)
     allBombs = 0;
     this->rows = rows;
     this->cols = columns;
+    this->mainWindow = mainWindow;
     //this->size = cellsize;
     createBlankGrid();
     setNeighbours();
@@ -36,6 +38,7 @@ void MineSweeper::firstIsPressed(Cell *cell)
     qDebug() << "setting bombs everywere, but not on cell or cells neighbours";
     setBombsAround(cell);
 
+    mainWindow->startTime();
 
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
