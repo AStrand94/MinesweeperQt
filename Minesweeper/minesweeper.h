@@ -24,6 +24,7 @@ private:
     void setNeighbours();
     void deleteGrid();
     void setBombsAround(Cell* cell);
+    bool isBombsRevealed = false;
 
 };
 

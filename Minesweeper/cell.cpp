@@ -11,10 +11,10 @@ Cell::Cell(int size){
 
 Cell::~Cell()
 {
+    //Delete all arrays. The cells appointed by the arrays should already be cleared
+    //by the scene.clear() function.
+
     delete[] neighbours;
-    //delete text;
-    //text = NULL;
-    //delete[] allBombs;
 }
 
 void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

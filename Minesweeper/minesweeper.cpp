@@ -1,6 +1,7 @@
 #include <iostream>
 #include "minesweeper.h"
 #include "cell.h"
+#include <ctime>
 
 MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns)
 {
@@ -23,6 +24,8 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns)
 
 MineSweeper::~MineSweeper()
 {
+    deleteGrid();
+
     scene = NULL;
 }
 
@@ -40,12 +43,15 @@ void MineSweeper::firstIsPressed(Cell *cell)
 }
 
 void MineSweeper::deleteGrid(){
-    for(int i = 0; i < rows; i++){
-        for(int j = 0; j < cols; j++){
-            delete grid[i][j];
-        }
-        delete[] grid[i];
-    }
+
+    //Because scene.clear() is called, it is not necessary to clear
+    //each item item in the ***grid, because that would couse a double delete,
+    //and make the program crash
+
+    for(int i = 0; i < rows; i++) delete[] grid[i];
+
+    delete grid;
+    delete allBombs;
 }
 
 
@@ -94,9 +100,13 @@ void MineSweeper::setBombsAround(Cell* cell)
 }
 
 void MineSweeper::revealeAllBombs(){
-    for(int i = 0; i < bombCount; i++){
-        allBombs[i]->reveal();
+    if(!isBombsRevealed){
+        isBombsRevealed = true;
+        for(int i = 0; i < bombCount; i++){
+            allBombs[i]->reveal();
+        }
     }
+
 }
 
 void MineSweeper::setNeighbours()

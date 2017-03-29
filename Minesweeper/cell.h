@@ -36,26 +36,21 @@ public:
     void drawText();
     void incrementNeighboursBombcount();
 
-
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *e);
 
 private:
     int i,size;
-
     int surroundingBombs = 0;
     bool isBomb = false;
     bool isPressed = false;
-    //QGraphicsTextItem *text;
-    Cell **neighbours;
     void revealNeighbours();
-    Cell **allBombs;
     int bombSize;
-
-    QGraphicsTextItem text;
     bool marked = false;
+    QGraphicsTextItem text;
     MineSweeper* game;
+    Cell **neighbours;
 
     void mark();
 };
