@@ -10,7 +10,7 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns)
     this->scene = scene;
     this->bombCount = bombs;
     //allBombs = new Cell*[bombCount];
-    allBombs = 0;
+    //allBombs = 0;
     this->rows = rows;
     this->cols = columns;
     //this->size = cellsize;
@@ -80,7 +80,7 @@ void MineSweeper::createBlankGrid()
 
 void MineSweeper::setBombsAround(Cell* cell)
 {
-    bombCount++;
+    //bombCount++;
 
     allBombs = new Cell*[bombCount];
 
@@ -98,10 +98,17 @@ void MineSweeper::setBombsAround(Cell* cell)
         if(!grid[x][y]->isNeighbour(cell) && grid[x][y] != cell){
             grid[x][y]->setBomb();
             qDebug() << "Incrementing: " << x << ", " << y;
-            grid[x][y]->incrementNeighboursBombcount();
+            //grid[x][y]->incrementNeighboursBombcount();
             allBombs[bombIndex++] = grid[x][y];
         }
     }
+
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < cols; j++){
+            grid[i][j]->countNeighbours();
+        }
+    }
+
     qDebug() << "Exiting loop that could take forever :D";
 }
 

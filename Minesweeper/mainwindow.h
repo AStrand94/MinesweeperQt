@@ -8,6 +8,7 @@
 #include <QGraphicsScene>
 #include "cell.h"
 #include "minesweeper.h"
+//#include "difficulty.h"
 
 using namespace std;
 

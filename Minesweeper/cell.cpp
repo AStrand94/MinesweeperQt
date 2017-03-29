@@ -78,6 +78,14 @@ void Cell::revealNeighbours(){
 
 }
 
+void Cell::countNeighbours()
+{
+    for(int i = 0; i < 8; i++){
+        if(neighbours[i] != 0 && neighbours[i]->isBomb)
+            surroundingBombs++;
+    }
+}
+
 void Cell::incrementNeighboursBombcount(){
     for(int i = 0; i < 8; i++){
         if(neighbours[i] != NULL){
