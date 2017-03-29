@@ -21,10 +21,8 @@ private:
     void createBlankGrid();
     Cell ***grid;
     Cell ** allBombs;
-    void setNeighbourBombs();
     void setNeighbours();
     void deleteGrid();
-    void clearBombs();
     void setBombsAround(Cell* cell);
 
 };

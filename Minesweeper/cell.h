@@ -22,18 +22,17 @@ public:
     QRectF boundingRect() const;
     QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const;
    // void setGeometry(const QRectF &r);
-    bool isItBomb();
-    void setBombs(int b);
+    bool isItBomb(); // poor name i chose because "isBomb" was taken :(
+
     void setNeighbours(Cell **neighbours);
     void reveal();
     void setBomb();
-    int getBombs();
-    void setBombsReference(Cell**,int);
+
     bool firstPress = true;
     Cell **getNeighbours();
     void setNotBomb();
     bool isNeighbour(Cell*);
-    void setParent(MineSweeper *);
+    void setGame(MineSweeper *);
     void drawText();
     void incrementNeighboursBombcount();
 
@@ -44,7 +43,7 @@ protected:
 
 private:
     int i,size;
-    int test = 0;
+
     int surroundingBombs = 0;
     bool isBomb = false;
     bool isPressed = false;

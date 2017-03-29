@@ -44,7 +44,7 @@ QRectF Cell::boundingRect() const{
     return QRectF(0,0,size,size);
 }
 
-void Cell::setParent(MineSweeper* p){
+void Cell::setGame(MineSweeper* p){
     game = p;
 }
 
@@ -62,11 +62,6 @@ QSizeF Cell::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
 
 bool Cell::isItBomb(){
     return isBomb;
-}
-
-void Cell::setBombs(int b)
-{
-    surroundingBombs = b;
 }
 
 void Cell::setNeighbours(Cell **informs)
@@ -104,6 +99,7 @@ void Cell::drawText(){
 
         text.setPlainText("B");
         text.setScale(scaleSize);
+        text.setTextWidth(size);
         text.setPos(0,0);
         text.setParentItem(this);
 
@@ -123,17 +119,6 @@ void Cell::drawText(){
 void Cell::setBomb()
 {
     isBomb = true;
-}
-
-int Cell::getBombs()
-{
-    return surroundingBombs;
-}
-
-void Cell::setBombsReference(Cell **bombref, int size)
-{
-    this->allBombs = bombref;
-    this->bombSize = size;
 }
 
 Cell **Cell::getNeighbours()
@@ -166,13 +151,11 @@ void Cell::reveal()
         isPressed = true;
         if(isItBomb()){
             game->revealeAllBombs();
-            qDebug() << "revealing";
-        }else{
-            if(surroundingBombs == 0) revealNeighbours();
-            drawText();
-        }
+        }else if(surroundingBombs == 0) revealNeighbours();
+
     }
     update();
+    drawText();
 }
 
 void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
@@ -183,7 +166,6 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
         game->firstIsPressed(this);
     }
 
-    qDebug() << "finally";
     if(right) {
         mark();
     }else{
@@ -195,6 +177,5 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
 
 void Cell::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)
 {
-    test = 0;
     QGraphicsItem::mouseReleaseEvent(e); //stopper visst utførelse av resten av funksjonen
 }

@@ -28,10 +28,10 @@ MineSweeper::~MineSweeper()
 
 void MineSweeper::firstIsPressed(Cell *cell)
 {
-    qDebug() << "setting surroudning bombs";
+    qDebug() << "setting bombs everywere, but not on cell or cells neighbours";
     setBombsAround(cell);
 
-    qDebug() << "Test";
+
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
             grid[i][j]->firstPress = false;
@@ -59,7 +59,7 @@ void MineSweeper::createBlankGrid()
             grid[i][j] = new Cell(size);
             grid[i][j]->setPos(i*size,j*size);
 
-            grid[i][j]->setParent(this);
+            grid[i][j]->setGame(this);
 
             scene->addItem(grid[i][j]);
         }
@@ -69,10 +69,7 @@ void MineSweeper::createBlankGrid()
 
 void MineSweeper::setBombsAround(Cell* cell)
 {
-
-    qDebug() << "before";
     bombCount++;
-    qDebug() << "After";
 
     allBombs = new Cell*[bombCount];
 
@@ -81,7 +78,7 @@ void MineSweeper::setBombsAround(Cell* cell)
     srand((unsigned int)time(0));
 
 
-    qDebug() << "Entering while loop";
+    qDebug() << "Entering loop that could take forever";
     while(bombIndex < bombCount){
 
         int x = rand() % rows;
@@ -93,6 +90,7 @@ void MineSweeper::setBombsAround(Cell* cell)
            allBombs[bombIndex++] = grid[x][y];
         }
     }
+        qDebug() << "Exiting loop that could take forever :D";
 }
 
 void MineSweeper::revealeAllBombs(){
