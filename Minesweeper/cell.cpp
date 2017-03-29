@@ -141,6 +141,7 @@ void Cell::mark()
 {
     if(!isPressed){
         marked = !marked;
+        game->onCellMarked(marked);
         update();
     }
 }

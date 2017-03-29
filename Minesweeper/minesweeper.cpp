@@ -47,6 +47,13 @@ void MineSweeper::firstIsPressed(Cell *cell)
     }
 }
 
+void MineSweeper::onCellMarked(bool marked){
+    if(marked)
+        mainWindow->increaseBombDisplayCount();
+    else
+        mainWindow->decreaseBombDisplayCount();
+}
+
 void MineSweeper::deleteGrid(){
 
     //Because scene.clear() is called, it is not necessary to clear

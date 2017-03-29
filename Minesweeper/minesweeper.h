@@ -15,6 +15,7 @@ public:
     ~MineSweeper();
     void firstIsPressed(Cell*);
     void revealeAllBombs();
+    void onCellMarked(bool);
 
 private:
     QGraphicsScene *scene;

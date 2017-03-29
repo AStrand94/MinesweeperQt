@@ -33,7 +33,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::createNewGame(int cols, int rows, int bombs){
     delete game;
+    delete timer;
     seconds = 0;
+    displayTime(seconds);
+    bombDisplayCount = bombs;
     game = new MineSweeper(scene, bombs, rows, cols, this);
 }
 
@@ -79,6 +82,19 @@ void MainWindow::on_clearButton_clicked()
     createNewGame(cols, rows, bombs);
 }
 
+void MainWindow::decreaseBombDisplayCount(){
+    bombDisplayCount--;
+    displayBombCount(bombDisplayCount);
+}
+void MainWindow::increaseBombDisplayCount(){
+    bombDisplayCount++;
+    displayBombCount(bombDisplayCount);
+}
+
+void MainWindow::displayBombCount(int bombs){
+    ui->lcdNumber_1->display(bombs);
+}
+
 void MainWindow::startTime(){
     timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
@@ -90,6 +106,5 @@ void MainWindow::updateTimer(){
 }
 
 void MainWindow::displayTime(int time){
-    qDebug()<<time;
     ui->lcdNumber->display(time);
 }

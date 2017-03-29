@@ -24,6 +24,8 @@ public:
     ~MainWindow();
 
     void startTime();
+    void decreaseBombDisplayCount();
+    void increaseBombDisplayCount();
 
 private slots:
     void updateTimer();
@@ -38,6 +40,8 @@ private:
      QTimer* timer;
      int seconds;
      void displayTime(int time);
+     int bombDisplayCount;
+     void displayBombCount(int bombs);
 };
 
 #endif // MAINWINDOW_H
