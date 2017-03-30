@@ -62,7 +62,7 @@ void MainWindow::setGameValuesToMedium()
 {
     cols = 24;
     rows = 24;
-    bombs = 50;
+    bombs = 2;
 }
 
 void MainWindow::setGameValuesToEasy()
@@ -77,6 +77,11 @@ void MainWindow::setGameValuesToHard()
     cols = 50;
     rows = 50;
     bombs = 500;
+}
+
+bool MainWindow::allBombsMarked()
+{
+    return game->allBombsMarked();
 }
 
 void MainWindow::on_clearButton_clicked()
@@ -115,6 +120,12 @@ void MainWindow::on_clearButton_clicked()
 void MainWindow::decreaseBombDisplayCount(){
     bombDisplayCount--;
     displayBombCount(bombDisplayCount);
+    if(bombDisplayCount == 0 && allBombsMarked()){
+        QMessageBox msg;
+        string s = to_string(seconds);
+        msg.setText("You made it!!!!!");
+        msg.exec();
+    }
 }
 void MainWindow::increaseBombDisplayCount(){
     bombDisplayCount++;

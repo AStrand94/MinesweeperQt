@@ -48,6 +48,7 @@ private:
      void setGameValuesToEasy();
      void setGameValuesToMedium();
      void setGameValuesToHard();
+     bool allBombsMarked();
 };
 
 #endif // MAINWINDOW_H

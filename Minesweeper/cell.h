@@ -36,6 +36,7 @@ public:
     void drawText();
     void incrementNeighboursBombcount();
     void countNeighbours();
+    bool isMarked();
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);

@@ -86,6 +86,11 @@ void Cell::countNeighbours()
     }
 }
 
+bool Cell::isMarked()
+{
+    return marked;
+}
+
 void Cell::incrementNeighboursBombcount(){
     for(int i = 0; i < 8; i++){
         if(neighbours[i] != NULL){

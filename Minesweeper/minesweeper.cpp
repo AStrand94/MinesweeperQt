@@ -47,10 +47,25 @@ void MineSweeper::firstIsPressed(Cell *cell)
 }
 
 void MineSweeper::onCellMarked(bool marked){
-    if(marked)
+    if(!marked)
         mainWindow->increaseBombDisplayCount();
     else
         mainWindow->decreaseBombDisplayCount();
+}
+
+bool MineSweeper::allBombsMarked()
+{
+    if(!bombsAreSet) return false;
+    int currentMarkCount = 0;
+    qDebug() << bombCount;
+
+    for(int i = 0; i < bombCount; i++){
+        qDebug() << "HALLO" << i;
+        if(allBombs[i]->isMarked()){
+            currentMarkCount++;
+        }
+    }
+    return currentMarkCount == bombCount;
 }
 
 void MineSweeper::deleteGrid(){
@@ -115,6 +130,7 @@ void MineSweeper::setBombsAround(Cell* cell)
         }
     }
 
+    bombsAreSet = true;
     qDebug() << "Exiting loop that could take forever :D";
 }
 

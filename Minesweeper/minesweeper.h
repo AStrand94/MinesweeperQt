@@ -20,6 +20,7 @@ public:
     void firstIsPressed(Cell*);
     void revealeAllBombs();
     void onCellMarked(bool);
+    bool allBombsMarked();
 
 private:
     QGraphicsScene *scene;
@@ -31,6 +32,7 @@ private:
     void deleteGrid();
     void setBombsAround(Cell* cell);
     bool isBombsRevealed = false;
+    bool bombsAreSet = false;
     MainWindow* mainWindow;
     Difficulty difficulty;
 
