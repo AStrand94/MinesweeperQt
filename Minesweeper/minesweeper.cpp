@@ -10,8 +10,7 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,
     if(bombs > rows*columns) bombs = rows*columns -1;
     this->scene = scene;
     this->bombCount = bombs;
-    //allBombs = new Cell*[bombCount];
-    //allBombs = 0;
+    allBombs = new Cell*[bombCount];
     this->rows = rows;
     this->cols = columns;
     this->mainWindow = mainWindow;
@@ -91,9 +90,6 @@ void MineSweeper::createBlankGrid()
 void MineSweeper::setBombsAround(Cell* cell)
 {
     //bombCount++;
-
-    allBombs = new Cell*[bombCount];
-
     int bombIndex = 0;
 
     srand((unsigned int)time(0));

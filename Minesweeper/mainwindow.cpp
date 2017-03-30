@@ -38,6 +38,18 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     displayTime(seconds);
     bombDisplayCount = bombs;
     game = new MineSweeper(scene, bombs, rows, cols, this);
+
+    //must be same as in minesweeper.h, TODO link them
+    int cellSize = 20;
+
+    qDebug() << "Resizing scene";
+    scene->setSceneRect(0, 0, cellSize*cols, cellSize*rows);
+    qDebug() << "Resizing view";
+    ui->graphicsView->setFixedSize(cellSize*cols+10, cellSize*rows+10);
+    qDebug() << "Resizing window";
+    setFixedSize(ui->graphicsView->width()+20, ui->graphicsView->height()+100);
+
+
 }
 
 MainWindow::~MainWindow()

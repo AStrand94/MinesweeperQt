@@ -23,7 +23,7 @@ public:
 
 private:
     QGraphicsScene *scene;
-    int bombCount, rows, cols, size = 25;
+    int bombCount, rows, cols, size = 20;
     void createBlankGrid();
     Cell ***grid;
     Cell ** allBombs;

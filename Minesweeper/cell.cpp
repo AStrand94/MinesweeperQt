@@ -97,10 +97,7 @@ void Cell::incrementNeighboursBombcount(){
 
 
 void Cell::drawText(){
-    double scaleSize;
-    if(size == 25) scaleSize = 1.0;
-    else if(size == 40) scaleSize = 1.3;
-    else scaleSize = 0.5;
+    double scaleSize = 1.0;
 
 
     if(isBomb){
