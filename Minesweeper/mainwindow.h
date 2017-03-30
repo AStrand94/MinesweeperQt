@@ -28,6 +28,8 @@ public:
     void decreaseBombDisplayCount();
     void increaseBombDisplayCount();
 
+
+
 private slots:
     void updateTimer();
     void on_clearButton_clicked();
@@ -43,6 +45,9 @@ private:
      void displayTime(int time);
      int bombDisplayCount;
      void displayBombCount(int bombs);
+     void setGameValuesToEasy();
+     void setGameValuesToMedium();
+     void setGameValuesToHard();
 };
 
 #endif // MAINWINDOW_H

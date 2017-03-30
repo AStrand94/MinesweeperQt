@@ -24,11 +24,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->graphicsView->setScene(scene);
 
-    bombs = 60;
-
     qInfo() << cols;
 
-    createNewGame(25, 25, bombs);
+
+    setGameValuesToMedium();
+
+    createNewGame(cols, rows, bombs);
 }
 
 void MainWindow::createNewGame(int cols, int rows, int bombs){
@@ -57,6 +58,27 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setGameValuesToMedium()
+{
+    cols = 24;
+    rows = 24;
+    bombs = 50;
+}
+
+void MainWindow::setGameValuesToEasy()
+{
+    cols = 15;
+    rows = 15;
+    bombs = 20;
+}
+
+void MainWindow::setGameValuesToHard()
+{
+    cols = 50;
+    rows = 50;
+    bombs = 500;
+}
+
 void MainWindow::on_clearButton_clicked()
 {
     QStringList list;
@@ -75,19 +97,13 @@ void MainWindow::on_clearButton_clicked()
 
     if(list.indexOf(s) > -1){
         if(list.at(1) == s){
-            cols = 24;
-            rows = 24;
-            bombs = 50;
+            setGameValuesToMedium();
 
         }else if(list.at(0) == s){
-            cols = 15;
-            rows = 15;
-            bombs = 20;
+            setGameValuesToEasy();
 
         }else{
-            cols = 50;
-            rows = 50;
-            bombs = 500;
+            setGameValuesToHard();
 
         }
     }
