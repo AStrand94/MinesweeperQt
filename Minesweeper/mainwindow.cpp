@@ -62,7 +62,7 @@ void MainWindow::setGameValuesToMedium()
 {
     cols = 24;
     rows = 24;
-    bombs = 2;
+    bombs = 70;
 }
 
 void MainWindow::setGameValuesToEasy()
