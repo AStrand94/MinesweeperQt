@@ -144,3 +144,45 @@ void Highscore::resetHighscore()
 
     cout << "Highscore is now reset." << endl;
 }
+
+bool Highscore::newHighscore(string mode, int time)
+{
+    string temp;
+    int j = 0;
+    bool modeFound = false;
+
+    ifstream file(filename);
+
+    //Loops through the highscore-document
+    while(!file.eof()) {
+        getline(file, temp);
+
+        //Set new highscore if empty.
+        if(modeFound && j != 3) {
+            if(temp.at(0) == ' ') {
+                return true;
+            }
+            //Finds the current highscores, and replaces if the time is better.
+            else {
+                string num;
+                for(int i = 0; i < temp.length(); i++) {
+                    if(temp.at(i) == ' ') break;
+                    num += temp.at(i);
+                }
+
+                //Replaces score if the time is better.
+                if(time < atoi(num.c_str())) {
+                    return true;
+                }
+                j++;
+            }
+        }
+
+        //Finds the correct header in file [Easy], [Normal] or [Hard].
+        if(mode == temp) {
+            modeFound = true;
+        }
+    }
+
+    return false;
+}
