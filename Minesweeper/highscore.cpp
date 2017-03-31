@@ -5,10 +5,15 @@
 #include <stdlib.h>
 #include <QMessageBox>
 #include <QString>
+#include <QStandardPaths>
+#include <QDesktopServices>
+#include <QDebug>
 
 using namespace std;
 
-const char *filename = "/Users/stiangrim/Desktop/highscores.txt";
+//For Mac --> Will be put in
+// /Users/'YOUR_USER'/MinesweeperQt/build-Minesweeper-Desktop_Qt_5_8_0_clang_64bit-Debug/Minesweeper.app/Contents/MacOS/Minesweeper
+const char *filename = "./highscores.txt";
 
 Highscore::Highscore()
 {
@@ -103,6 +108,12 @@ const char *Highscore::getFileName()
 
 void Highscore::showHighscore()
 {
+    //Checks if file exists
+    ifstream file(filename);
+    if(!file.good()) {
+        resetHighscore();
+    }
+
     string s = getDocumentContent();
     QString qs = QString::fromStdString(s);
 
