@@ -21,8 +21,6 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,
     qDebug() << "rows " << rows;
     qDebug() << "cols " << columns;
     qDebug() << "bombs" << bombs;
-
-
 }
 
 MineSweeper::~MineSweeper()
@@ -109,14 +107,13 @@ void MineSweeper::setBombsAround(Cell* cell)
 
     srand((unsigned int)time(0));
 
-
     qDebug() << "Entering loop that could take forever";
     while(bombIndex < bombCount){
 
         int x = rand() % rows;
         int y = rand() % cols;
 
-        if(!grid[x][y]->isNeighbour(cell) && grid[x][y] != cell){
+        if(!grid[x][y]->isNeighbour(cell) && grid[x][y] != cell && !grid[x][y]->isItBomb()){
             grid[x][y]->setBomb();
             qDebug() << "Incrementing: " << x << ", " << y;
             //grid[x][y]->incrementNeighboursBombcount();
@@ -200,7 +197,3 @@ void MineSweeper::setNeighbours()
         }
     }
 }
-
-
-
-

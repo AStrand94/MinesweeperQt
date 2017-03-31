@@ -34,7 +34,6 @@ public:
 private slots:
     void updateTimer();
     void on_clearButton_clicked();
-
     void on_highscoreButton_clicked();
 
 private:

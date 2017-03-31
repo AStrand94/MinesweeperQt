@@ -4,7 +4,6 @@
 #include <QMessageBox>
 #include <minesweeper.h>
 
-
 Cell::Cell(int size){
     this->size = size;
 }
@@ -106,7 +105,6 @@ void Cell::drawText(){
 
 
     if(isBomb){
-
         text.setPlainText("B");
         text.setScale(scaleSize);
         text.setTextWidth(size);

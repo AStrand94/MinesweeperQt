@@ -37,6 +37,7 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     delete timer;
     seconds = 0;
     displayTime(seconds);
+    displayBombCount(bombs);
     bombDisplayCount = bombs;
     game = new MineSweeper(scene, bombs, rows, cols, this);
 
@@ -106,13 +107,16 @@ void MainWindow::setHighScore()
         return; //CUSTOM GAME
     }
 
-    bool ok;
-    QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
+    if(highscore.newHighscore(d, time)) {
+
+        bool ok;
+        QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
                                              tr("Your name:"), QLineEdit::Normal,
                                              QDir::home().dirName(), &ok);
-    if (!ok || name.isEmpty()) return;
+        if (!ok || name.isEmpty()) return;
 
-    highscore.setHighscore(d,name.toStdString(),time);
+        highscore.setHighscore(d,name.toStdString(),time);
+    }
 }
 
 void MainWindow::on_clearButton_clicked()
@@ -182,8 +186,8 @@ void MainWindow::displayBombCount(int bombs){
 
 void MainWindow::startTime(){
     timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
-        timer->start(1000);
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
+    timer->start(1000);
 }
 
 void MainWindow::updateTimer(){
