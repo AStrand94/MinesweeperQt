@@ -134,6 +134,12 @@ void MineSweeper::setBombsAround(Cell* cell)
     qDebug() << "Exiting loop that could take forever :D";
 }
 
+int MineSweeper::getBombs()
+{
+    return bombCount;
+}
+
+
 void MineSweeper::revealeAllBombs(){
     if(!isBombsRevealed){
         isBombsRevealed = true;

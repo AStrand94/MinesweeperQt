@@ -32,7 +32,7 @@ void Highscore::createHighscore(string s)
     cout << "Finished." << endl;
 }
 
-void Highscore::setHighscore(string mode, string name, float time)
+void Highscore::setHighscore(string mode, string name, int time)
 {
     string s;
     string temp;

@@ -38,7 +38,7 @@ private slots:
     void on_highscoreButton_clicked();
 
 private:
-    Highscore *highscore;
+    Highscore highscore;
     int rows, cols, size,bombs;
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
@@ -53,6 +53,7 @@ private:
      void setGameValuesToMedium();
      void setGameValuesToHard();
      bool allBombsMarked();
+     void setHighScore();
 };
 
 #endif // MAINWINDOW_H

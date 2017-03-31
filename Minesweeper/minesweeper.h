@@ -21,6 +21,7 @@ public:
     void revealeAllBombs();
     void onCellMarked(bool);
     bool allBombsMarked();
+    int getBombs();
 
 private:
     QGraphicsScene *scene;

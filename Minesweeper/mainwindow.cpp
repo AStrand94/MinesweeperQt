@@ -84,6 +84,37 @@ bool MainWindow::allBombsMarked()
     return game->allBombsMarked();
 }
 
+void MainWindow::setHighScore()
+{
+    string d;
+    int time = seconds;
+    int nbombs = game->getBombs();
+    qDebug() << nbombs << "HEIHEIHEIHEIHIE";
+
+    switch(nbombs){
+    case 20:
+        d = "Easy";
+        break;
+    case 70:
+        d = "Medium";
+        break;
+    case 500:
+        d = "Hard";
+        break;
+    default:
+        qDebug() << "BOMBS DOES NOT MATCH A SETTING";
+        return; //CUSTOM GAME
+    }
+
+    bool ok;
+    QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
+                                             tr("Your name:"), QLineEdit::Normal,
+                                             QDir::home().dirName(), &ok);
+    if (!ok || name.isEmpty()) return;
+
+    highscore.setHighscore(d,name.toStdString(),time);
+}
+
 void MainWindow::on_clearButton_clicked()
 {
     QStringList list;
@@ -119,7 +150,7 @@ void MainWindow::on_clearButton_clicked()
 
 void MainWindow::on_highscoreButton_clicked()
 {
-    highscore->showHighscore();
+    highscore.showHighscore();
 }
 
 void MainWindow::decreaseBombDisplayCount(){
@@ -130,11 +161,19 @@ void MainWindow::decreaseBombDisplayCount(){
         string s = to_string(seconds);
         msg.setText("You made it!!!!!");
         msg.exec();
+        setHighScore();
     }
 }
 void MainWindow::increaseBombDisplayCount(){
     bombDisplayCount++;
     displayBombCount(bombDisplayCount);
+    if(bombDisplayCount == 0 && allBombsMarked()){
+        QMessageBox msg;
+        string s = to_string(seconds);
+        msg.setText("You made it!!!!!");
+        msg.exec();
+        setHighScore();
+    }
 }
 
 void MainWindow::displayBombCount(int bombs){
