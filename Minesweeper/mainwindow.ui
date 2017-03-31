@@ -56,6 +56,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="highscoreButton">
+        <property name="text">
+         <string>Highscores</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLCDNumber" name="lcdNumber_1"/>
       </item>
      </layout>

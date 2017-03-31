@@ -117,6 +117,11 @@ void MainWindow::on_clearButton_clicked()
     createNewGame(cols, rows, bombs);
 }
 
+void MainWindow::on_highscoreButton_clicked()
+{
+    highscore->showHighscore();
+}
+
 void MainWindow::decreaseBombDisplayCount(){
     bombDisplayCount--;
     displayBombCount(bombDisplayCount);

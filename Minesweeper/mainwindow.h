@@ -8,6 +8,7 @@
 #include <QGraphicsScene>
 #include "cell.h"
 #include "minesweeper.h"
+#include <highscore.h>
 //#include "difficulty.h"
 
 using namespace std;
@@ -34,7 +35,10 @@ private slots:
     void updateTimer();
     void on_clearButton_clicked();
 
+    void on_highscoreButton_clicked();
+
 private:
+    Highscore *highscore;
     int rows, cols, size,bombs;
     Ui::MainWindow *ui;
     QGraphicsScene *scene;

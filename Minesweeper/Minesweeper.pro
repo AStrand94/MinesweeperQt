@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     minesweeper.cpp \
-    cell.cpp
+    cell.cpp \
+    highscore.cpp
 
 HEADERS  += mainwindow.h \
     minesweeper.h \
     cell.h \
-    difficulty.h
+    difficulty.h \
+    highscore.h
 
 FORMS    += mainwindow.ui
