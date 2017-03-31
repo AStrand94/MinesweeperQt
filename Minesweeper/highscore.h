@@ -16,6 +16,7 @@ public:
     void showHighscore();
     string getDocumentContent();
     void resetHighscore();
+    bool newHighscore(string, int);
 };
 
 #endif // HIGHSCORE_H
