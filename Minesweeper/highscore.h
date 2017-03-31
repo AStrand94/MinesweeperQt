@@ -11,7 +11,6 @@ class Highscore
 public:
     Highscore();
     void createHighscore(string);
-    void readFromFile(const char*);
     void setHighscore(string, string, float);
     const char* getFileName();
     void showHighscore();

@@ -20,6 +20,7 @@ Highscore::Highscore()
 
 }
 
+//Owerwrites/creates "highscores.txt"
 void Highscore::createHighscore(string s)
 {
     ofstream document(filename);
@@ -29,17 +30,6 @@ void Highscore::createHighscore(string s)
     document.close();
 
     cout << "Finished." << endl;
-}
-
-void Highscore::readFromFile(const char *filename)
-{
-    string s;
-    ifstream file(filename);
-    while(!file.eof()) {
-        getline(file, s);
-        cout << s;
-        cout << endl;
-    }
 }
 
 void Highscore::setHighscore(string mode, string name, float time)
@@ -57,19 +47,23 @@ void Highscore::setHighscore(string mode, string name, float time)
     while(!file.eof()) {
         getline(file, temp);
 
+        //Moves previous highscores down, if a new highscore is set.
         if(moveLines && j != 3) {
             t = previousLine;
             previousLine = temp;
             temp = t;
             j++;
         }
+        //Set new highscore if empty.
         else if(modeFound && j != 3) {
             if(temp.at(0) == ' ') {
                 temp = to_string(time);
                 temp += " - ";
                 temp += name;
                 j = 3;
-            } else {
+            }
+            //Finds the current highscores, and replaces if the time is better.
+            else {
 
                 string num;
                 for(int i = 0; i < temp.length(); i++) {
@@ -77,6 +71,7 @@ void Highscore::setHighscore(string mode, string name, float time)
                     num += temp.at(i);
                 }
 
+                //Replaces score if the time is better.
                 if(time < atoi(num.c_str())) {
                     previousLine = temp;
                     temp = to_string(time);
@@ -92,12 +87,14 @@ void Highscore::setHighscore(string mode, string name, float time)
         s += temp;
         s += "\n";
 
-        //Finds the correct header in file
+        //Finds the correct header in file [Easy], [Normal] or [Hard].
         if(mode == temp) {
             modeFound = true;
         }
     }
     s.erase(s.length()-1, s.length());
+
+    //Overwrites file.
     createHighscore(s);
 }
 
@@ -117,9 +114,11 @@ void Highscore::showHighscore()
     string s = getDocumentContent();
     QString qs = QString::fromStdString(s);
 
+    //Opens up a QMessageBox with the highscores
     QMessageBox::about(NULL, "Highscore", qs);
 }
 
+//Reads the document, and returns its contaning string
 string Highscore::getDocumentContent()
 {
     string s;
@@ -134,15 +133,14 @@ string Highscore::getDocumentContent()
     return s;
 }
 
+//Resets the highscores with empty rankings
 void Highscore::resetHighscore()
 {
-    ofstream document(filename);
+    string s = "Easy\n - \n - \n - \n\n"
+               "Normal\n - \n - \n - \n\n"
+               "Hard\n - \n - \n - ";
 
-    document << "Easy\n - \n - \n - \n\n"
-                "Normal\n - \n - \n - \n\n"
-                "Hard\n - \n - \n - ";
-
-    document.close();
+    createHighscore(s);
 
     cout << "Highscore is now reset." << endl;
 }
