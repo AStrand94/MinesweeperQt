@@ -55,6 +55,10 @@ private:
     Cell **neighbours;
 
     void mark();
+    void drawMarkedCell(QPainter *painter);
+    void drawBomb(QPainter *painter);
+    void drawClickedCell(QPainter *painter);
+    void drawUnClickedCell(QPainter *painter);
 };
 
 #endif // RECTITEMTEST_H

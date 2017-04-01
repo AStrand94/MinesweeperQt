@@ -18,24 +18,48 @@ Cell::~Cell()
 
 void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QRectF rec = boundingRect();
-    QBrush brush;
     if(marked){
-        brush = QBrush(Qt::yellow);
+        drawMarkedCell(painter);
     }else if(isPressed){
         if(isBomb){
-            brush = QBrush(Qt::darkRed);
+            drawBomb(painter);
         }else{
-            brush = QBrush(Qt::white);
+            drawClickedCell(painter);
         }
     }else{
-        brush = QBrush(Qt::darkGray);
+        drawUnClickedCell(painter);
     }
+}
 
-    painter->fillRect(rec,brush);
+void Cell::drawMarkedCell(QPainter* painter){
+    QBrush brush = Qt::yellow;
+    painter->fillRect(boundingRect(), brush);
+
+    painter->drawRect(boundingRect());
+}
+
+void Cell::drawBomb(QPainter* painter){
+    QBrush brush = Qt::red;
+    painter->fillRect(boundingRect(), brush);
 
     painter->drawRect(boundingRect());
 
+
+
+}
+
+void Cell::drawClickedCell(QPainter* painter){
+    QBrush brush = Qt::white;
+    painter->fillRect(boundingRect(), brush);
+
+    painter->drawRect(boundingRect());
+}
+
+void Cell::drawUnClickedCell(QPainter* painter){
+    QBrush brush = Qt::gray;
+    painter->fillRect(boundingRect(), brush);
+
+    painter->drawRect(boundingRect());
 }
 
 
@@ -100,29 +124,6 @@ void Cell::incrementNeighboursBombcount(){
 
 
 
-void Cell::drawText(){
-    double scaleSize = 1.0;
-
-
-    if(isBomb){
-        text.setPlainText("B");
-        text.setScale(scaleSize);
-        text.setTextWidth(size);
-        text.setPos(0,0);
-        text.setParentItem(this);
-
-        text.show();
-    }else if(surroundingBombs > 0){
-
-        text.setPlainText(QString::number(surroundingBombs));
-        text.setScale(scaleSize);
-        text.setPos(0,0);
-        text.setParentItem(this);
-        text.show();
-    }
-    isPressed = true;
-    update();
-}
 
 void Cell::setBomb()
 {
@@ -132,6 +133,17 @@ void Cell::setBomb()
 Cell **Cell::getNeighbours()
 {
     return neighbours;
+}
+
+void Cell::drawText(){
+    double scaleSize = 1.0;
+
+    text.setPlainText(isBomb?"B":surroundingBombs > 0 ? QString::number(surroundingBombs) : "");
+    text.setScale(scaleSize);
+    text.setPos(0,0);
+    text.setParentItem(this);
+    text.show();
+
 }
 
 void Cell::setNotBomb()
@@ -178,6 +190,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
         mark();
     }else if(!marked){
         reveal();
+
     }
     QGraphicsItem::mousePressEvent(e);
 
