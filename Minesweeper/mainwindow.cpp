@@ -63,7 +63,7 @@ void MainWindow::setGameValuesToMedium()
 {
     cols = 24;
     rows = 24;
-    bombs = 1;
+    bombs = 70;
 }
 
 void MainWindow::setGameValuesToEasy()
@@ -90,7 +90,6 @@ void MainWindow::setHighScore()
     string d;
     int time = seconds;
     int nbombs = game->getBombs();
-    qDebug() << nbombs << "HEIHEIHEIHEIHIE";
 
     switch(nbombs){
     case 20:
@@ -106,9 +105,7 @@ void MainWindow::setHighScore()
         qDebug() << "BOMBS DOES NOT MATCH A SETTING";
         return; //CUSTOM GAME
     }
-    qDebug() << "NEW FUCKING HIGHSCORE????????????";
     if(highscore.newHighscore(d, time)) {
-        qDebug() << "NEW FUCKING HIGHSCORE";
         bool ok;
         QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
                                              tr("Your name:"), QLineEdit::Normal,
@@ -121,14 +118,10 @@ void MainWindow::setHighScore()
 
 void MainWindow::on_clearButton_clicked()
 {
-    ui->graphicsView->setEnabled(false);
-
     bool newgame = chooseNewGame();
-    ui->graphicsView->setEnabled(true);
     if(!newgame) return;
     scene->clear();
     createNewGame(cols, rows, bombs);
-
 }
 
 bool MainWindow::chooseNewGame()
@@ -170,7 +163,6 @@ void MainWindow::decreaseBombDisplayCount(){
     bombDisplayCount--;
     displayBombCount(bombDisplayCount);
     if(bombDisplayCount == 0 && allBombsMarked()){
-        qDebug() << ui->graphicsView->focusPolicy();
         gameFinished(true);
     }
 }

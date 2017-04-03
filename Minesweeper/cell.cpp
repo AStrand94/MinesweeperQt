@@ -180,7 +180,6 @@ void Cell::reveal()
 
 void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
 {
-    qDebug() << "Hei";
     bool right = e->button() == Qt::RightButton;
     if(firstPress && !right){
         qDebug() << "First klick :D";
