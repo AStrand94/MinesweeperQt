@@ -28,6 +28,7 @@ public:
     void startTime();
     void decreaseBombDisplayCount();
     void increaseBombDisplayCount();
+    void gameFinished(bool);
 
 
 
@@ -53,6 +54,7 @@ private:
      void setGameValuesToHard();
      bool allBombsMarked();
      void setHighScore();
+     bool chooseNewGame();
 };
 
 #endif // MAINWINDOW_H

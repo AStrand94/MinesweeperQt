@@ -40,7 +40,7 @@ public:
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *e);
+    //void mouseReleaseEvent(QGraphicsSceneMouseEvent *e);
 
 private:
     int i,size;

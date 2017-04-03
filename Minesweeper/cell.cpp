@@ -180,6 +180,7 @@ void Cell::reveal()
 
 void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
 {
+    qDebug() << "Hei";
     bool right = e->button() == Qt::RightButton;
     if(firstPress && !right){
         qDebug() << "First klick :D";
@@ -190,13 +191,12 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
         mark();
     }else if(!marked){
         reveal();
-
     }
-    QGraphicsItem::mousePressEvent(e);
 
+    QGraphicsItem::mousePressEvent(e);
 }
 
-void Cell::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)
+/*void Cell::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)
 {
     QGraphicsItem::mouseReleaseEvent(e); //stopper visst utførelse av resten av funksjonen
-}
+}*/
