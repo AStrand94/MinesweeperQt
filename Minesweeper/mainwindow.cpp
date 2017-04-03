@@ -75,8 +75,8 @@ void MainWindow::setGameValuesToEasy()
 
 void MainWindow::setGameValuesToHard()
 {
-    cols = 50;
-    rows = 50;
+    cols = 40;
+    rows = 40;
     bombs = 500;
 }
 
