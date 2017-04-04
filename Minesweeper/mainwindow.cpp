@@ -50,7 +50,7 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     ui->graphicsView->setFixedSize(cellSize*cols+10, cellSize*rows+10);
     qDebug() << "Resizing window";
     setFixedSize(ui->graphicsView->width()+20, ui->graphicsView->height()+100);
-
+    ui->graphicsView->setEnabled(true);
     timer = new QTimer(this);
 }
 
@@ -185,6 +185,7 @@ void MainWindow::gameFinished(bool fin){
         text = "YOU MADE IT!";
     else
         text = "You failed...";
+    ui->graphicsView->setEnabled(false);
     QMessageBox msg;
     msg.setText(text);
     msg.setWindowModality(Qt::WindowModal);

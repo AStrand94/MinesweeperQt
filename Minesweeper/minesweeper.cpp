@@ -155,10 +155,11 @@ void MineSweeper::checkIfWon()
 void MineSweeper::revealeAllBombs(){
     if(!isBombsRevealed){
         isBombsRevealed = true;
-        mainWindow->gameFinished(false);
         for(int i = 0; i < bombCount; i++){
             allBombs[i]->reveal();
         }
+
+        mainWindow->gameFinished(false);
     }
 }
 
