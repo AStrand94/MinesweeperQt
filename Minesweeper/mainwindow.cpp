@@ -70,7 +70,7 @@ void MainWindow::setGameValuesToEasy()
 {
     cols = 15;
     rows = 15;
-    bombs = 2;
+    bombs = 20;
 }
 
 void MainWindow::setGameValuesToHard()
@@ -92,7 +92,7 @@ void MainWindow::setHighScore()
     int nbombs = game->getBombs();
 
     switch(nbombs){
-    case 2:
+    case 20:
         d = "Easy";
         break;
     case 70:
