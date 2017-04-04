@@ -22,7 +22,7 @@ public:
     QRectF boundingRect() const;
     QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const;
    // void setGeometry(const QRectF &r);
-    bool isItBomb(); // poor name i chose because "isBomb" was taken :(
+    bool isBomb(); // poor name i chose because "isBomb" was taken :(
 
     void setNeighbours(Cell **neighbours);
     void reveal();
@@ -37,6 +37,7 @@ public:
     void incrementNeighboursBombcount();
     void countNeighbours();
     bool isMarked();
+    bool isPressed();
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *e);
@@ -45,11 +46,11 @@ protected:
 private:
     int i,size;
     int surroundingBombs = 0;
-    bool isBomb = false;
-    bool isPressed = false;
+    bool bomb = false;
+    bool pressed = false;
+    bool marked = false;
     void revealNeighbours();
     int bombSize;
-    bool marked = false;
     QGraphicsTextItem text;
     MineSweeper* game;
     Cell **neighbours;

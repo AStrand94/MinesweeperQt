@@ -70,7 +70,7 @@ void MainWindow::setGameValuesToEasy()
 {
     cols = 15;
     rows = 15;
-    bombs = 20;
+    bombs = 2;
 }
 
 void MainWindow::setGameValuesToHard()
@@ -92,7 +92,7 @@ void MainWindow::setHighScore()
     int nbombs = game->getBombs();
 
     switch(nbombs){
-    case 20:
+    case 2:
         d = "Easy";
         break;
     case 70:
@@ -110,7 +110,9 @@ void MainWindow::setHighScore()
         QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
                                              tr("Your name:"), QLineEdit::Normal,
                                              QDir::home().dirName(), &ok);
+
         if (!ok || name.isEmpty()) return;
+
 
         highscore.setHighscore(d,name.toStdString(),time);
     }
@@ -177,6 +179,7 @@ void MainWindow::increaseBombDisplayCount(){
 
 void MainWindow::gameFinished(bool fin){
 
+    timer->stop();
     QString text;
     if(fin)
         text = "YOU MADE IT!";
@@ -186,6 +189,7 @@ void MainWindow::gameFinished(bool fin){
     msg.setText(text);
     msg.setWindowModality(Qt::WindowModal);
     msg.exec();
+
     if(fin) setHighScore();
 }
 
@@ -201,7 +205,7 @@ void MainWindow::startTime(){
 }
 
 void MainWindow::updateTimer(){
-    displayTime(seconds++);
+    displayTime(++seconds);
 }
 
 void MainWindow::displayTime(int time){

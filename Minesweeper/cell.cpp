@@ -20,8 +20,8 @@ void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 {
     if(marked){
         drawMarkedCell(painter);
-    }else if(isPressed){
-        if(isBomb){
+    }else if(pressed){
+        if(bomb){
             drawBomb(painter);
         }else{
             drawClickedCell(painter);
@@ -83,8 +83,8 @@ QSizeF Cell::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
     setPos(r.topLeft());
 }*/
 
-bool Cell::isItBomb(){
-    return isBomb;
+bool Cell::isBomb(){
+    return bomb;
 }
 
 void Cell::setNeighbours(Cell **informs)
@@ -95,7 +95,7 @@ void Cell::setNeighbours(Cell **informs)
 void Cell::revealNeighbours(){
         for(int i = 0; i < 8; i++){
             if(neighbours[i] != NULL)
-                if( !neighbours[i]->isPressed)
+                if( !neighbours[i]->pressed)
                     neighbours[i]->reveal();
         }
 
@@ -104,7 +104,7 @@ void Cell::revealNeighbours(){
 void Cell::countNeighbours()
 {
     for(int i = 0; i < 8; i++){
-        if(neighbours[i] != 0 && neighbours[i]->isBomb)
+        if(neighbours[i] != 0 && neighbours[i]->bomb)
             surroundingBombs++;
     }
 }
@@ -112,6 +112,11 @@ void Cell::countNeighbours()
 bool Cell::isMarked()
 {
     return marked;
+}
+
+bool Cell::isPressed()
+{
+    return pressed;
 }
 
 void Cell::incrementNeighboursBombcount(){
@@ -127,7 +132,7 @@ void Cell::incrementNeighboursBombcount(){
 
 void Cell::setBomb()
 {
-    isBomb = true;
+    bomb = true;
 }
 
 Cell **Cell::getNeighbours()
@@ -138,7 +143,7 @@ Cell **Cell::getNeighbours()
 void Cell::drawText(){
     double scaleSize = 1.0;
 
-    text.setPlainText(isBomb?"B":surroundingBombs > 0 ? QString::number(surroundingBombs) : "");
+    text.setPlainText(bomb?"B":surroundingBombs > 0 ? QString::number(surroundingBombs) : "");
     text.setScale(scaleSize);
     text.setPos(0,0);
     text.setParentItem(this);
@@ -148,7 +153,7 @@ void Cell::drawText(){
 
 void Cell::setNotBomb()
 {
-    isBomb = false;
+    bomb = false;
 }
 
 bool Cell::isNeighbour(Cell *cell)
@@ -159,7 +164,7 @@ bool Cell::isNeighbour(Cell *cell)
 
 void Cell::mark()
 {
-    if(!isPressed){
+    if(!pressed){
         marked = !marked;
         game->onCellMarked(marked);
         update();
@@ -168,11 +173,13 @@ void Cell::mark()
 
 void Cell::reveal()
 {
-    if(!isPressed && !marked){
-        isPressed = true;
-        if(isItBomb()){
+    if(!pressed && !marked){
+        pressed = true;
+        if(isBomb()){
             game->revealeAllBombs();
-        }else if(surroundingBombs == 0) revealNeighbours();
+        }else if(surroundingBombs == 0)
+            revealNeighbours();
+
         drawText();
     }
     update();
@@ -190,6 +197,7 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
         mark();
     }else if(!marked){
         reveal();
+        game->checkIfWon();
     }
 
     QGraphicsItem::mousePressEvent(e);

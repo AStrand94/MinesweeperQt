@@ -113,7 +113,7 @@ void MineSweeper::setBombsAround(Cell* cell)
         int x = rand() % rows;
         int y = rand() % cols;
 
-        if(!grid[x][y]->isNeighbour(cell) && grid[x][y] != cell && !grid[x][y]->isItBomb()){
+        if(!grid[x][y]->isNeighbour(cell) && grid[x][y] != cell && !grid[x][y]->isBomb()){
             grid[x][y]->setBomb();
             qDebug() << "Incrementing: " << x << ", " << y;
             //grid[x][y]->incrementNeighboursBombcount();
@@ -134,6 +134,21 @@ void MineSweeper::setBombsAround(Cell* cell)
 int MineSweeper::getBombs()
 {
     return bombCount;
+}
+
+void MineSweeper::checkIfWon()
+{
+    qDebug() << "Did you win?";
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < cols; j++){
+            if(!grid[i][j]->isPressed() && !grid[i][j]->isBomb()){
+                qDebug() << "No :(";
+                return;
+            }
+        }
+    }
+    qDebug() << "Yes :)";
+    mainWindow->gameFinished(true);
 }
 
 

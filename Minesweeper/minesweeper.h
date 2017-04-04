@@ -22,6 +22,7 @@ public:
     void onCellMarked(bool);
     bool allBombsMarked();
     int getBombs();
+    void checkIfWon();
 
 private:
     QGraphicsScene *scene;
