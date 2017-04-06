@@ -64,6 +64,7 @@ void MainWindow::setGameValuesToMedium()
     cols = 24;
     rows = 24;
     bombs = 70;
+    setWindowTitle("Medium");
 }
 
 void MainWindow::setGameValuesToEasy()
@@ -71,6 +72,7 @@ void MainWindow::setGameValuesToEasy()
     cols = 15;
     rows = 15;
     bombs = 20;
+    setWindowTitle("Easy");
 }
 
 void MainWindow::setGameValuesToHard()
@@ -78,6 +80,7 @@ void MainWindow::setGameValuesToHard()
     cols = 40;
     rows = 40;
     bombs = 450;
+    setWindowTitle("Hard");
 }
 
 bool MainWindow::allBombsMarked()

@@ -17,6 +17,7 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,
     //this->size = cellsize;
     createBlankGrid();
     setNeighbours();
+    Cell::firstPress = true;
     qDebug() << "Game created";
     qDebug() << "rows " << rows;
     qDebug() << "cols " << columns;
@@ -37,11 +38,7 @@ void MineSweeper::firstIsPressed(Cell *cell)
 
     mainWindow->startTime();
 
-    for(int i = 0; i < rows; i++){
-        for(int j = 0; j < cols; j++){
-            grid[i][j]->firstPress = false;
-        }
-    }
+    Cell::firstPress = false;
 }
 
 void MineSweeper::onCellMarked(bool marked){

@@ -31,6 +31,10 @@ void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     }
 }
 
+
+MineSweeper *Cell::game;
+bool Cell::firstPress;
+
 void Cell::drawMarkedCell(QPainter* painter){
     QBrush brush = Qt::yellow;
     painter->fillRect(boundingRect(), brush);
@@ -66,8 +70,6 @@ void Cell::drawUnClickedCell(QPainter* painter){
 QRectF Cell::boundingRect() const{
     return QRectF(0,0,size,size);
 }
-
-MineSweeper *Cell::game;
 
 void Cell::setGame(MineSweeper* p){
     game = p;

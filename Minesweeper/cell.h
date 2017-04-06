@@ -28,7 +28,7 @@ public:
     void reveal();
     void setBomb();
 
-    bool firstPress = true;
+    static bool firstPress;
     Cell **getNeighbours();
     void setNotBomb();
     bool isNeighbour(Cell*);
