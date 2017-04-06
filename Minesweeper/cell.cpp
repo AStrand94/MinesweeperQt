@@ -67,6 +67,8 @@ QRectF Cell::boundingRect() const{
     return QRectF(0,0,size,size);
 }
 
+MineSweeper *Cell::game;
+
 void Cell::setGame(MineSweeper* p){
     game = p;
 }

@@ -86,13 +86,15 @@ void MineSweeper::createBlankGrid()
 {
     grid = new Cell**[rows];
 
+    Cell::setGame(this);
+
     for(int i = 0; i < rows; i++){
         grid[i] = new Cell*[cols];
         for(int j = 0; j < cols; j++){
             grid[i][j] = new Cell(size);
             grid[i][j]->setPos(i*size,j*size);
 
-            grid[i][j]->setGame(this);
+            //grid[i][j]->setGame(this);
 
             scene->addItem(grid[i][j]);
         }

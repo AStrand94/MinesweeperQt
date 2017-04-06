@@ -32,7 +32,7 @@ public:
     Cell **getNeighbours();
     void setNotBomb();
     bool isNeighbour(Cell*);
-    void setGame(MineSweeper *);
+    static void setGame(MineSweeper *);
     void drawText();
     void incrementNeighboursBombcount();
     void countNeighbours();
@@ -52,9 +52,8 @@ private:
     void revealNeighbours();
     int bombSize;
     QGraphicsTextItem text;
-    MineSweeper* game;
     Cell **neighbours;
-
+    static MineSweeper* game;
     void mark();
     void drawMarkedCell(QPainter *painter);
     void drawBomb(QPainter *painter);
