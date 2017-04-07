@@ -37,6 +37,8 @@ private slots:
     void on_clearButton_clicked();
     void on_highscoreButton_clicked();
 
+    void on_pauseButton_clicked();
+
 private:
     Highscore highscore;
     int rows, cols, size,bombs;

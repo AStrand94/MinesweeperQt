@@ -14,20 +14,18 @@
 #include "minesweeper.h"
 using namespace std;
 
+bool gamePaused;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    gamePaused = false;
     ui->setupUi(this);
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
-
-    ui->graphicsView->setScene(scene);
-
     qInfo() << cols;
-
     setGameValuesToMedium();
-
     createNewGame(cols, rows, bombs);
 }
 
@@ -214,4 +212,29 @@ void MainWindow::updateTimer(){
 
 void MainWindow::displayTime(int time){
     ui->lcdNumber->display(time);
+}
+
+void MainWindow::on_pauseButton_clicked()
+{
+    //if game is running
+    if(!gamePaused) {
+        if(timer != NULL) {
+            timer->stop();
+            scene->setForegroundBrush(QBrush(Qt::darkGray, Qt::SolidPattern));
+            ui->graphicsView->setDisabled(true);
+            gamePaused = true;
+            ui->pauseButton->setText("Resume");
+            ui->pauseButton->setStyleSheet(QString("QPushButton {color: green;}"));
+            QMessageBox::information(this, "Paused", "Game paused!");
+        } else {
+            QMessageBox::information(this, "Information", "You need an active game in order to pause!");
+        }
+    } else {
+        ui->pauseButton->setText("Pause");
+        ui->pauseButton->setStyleSheet(QString("QPushButton {color: none;}"));
+        scene->setForegroundBrush(Qt::NoBrush);
+        ui->graphicsView->setDisabled(false);
+        timer->start();
+        gamePaused = false;
+    }
 }
