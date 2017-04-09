@@ -3,6 +3,7 @@
 #include "cell.h"
 #include <ctime>
 #include <mainwindow.h>
+#include <QMediaPlayer>
 
 MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns, MainWindow* mainWindow)
 {
@@ -22,6 +23,9 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,
     qDebug() << "rows " << rows;
     qDebug() << "cols " << columns;
     qDebug() << "bombs" << bombs;
+    player = new QMediaPlayer;
+    player->setMedia(QUrl::fromLocalFile("/Users/stiangrim/MinesweeperQt/Minesweeper/bomb.mp3"));
+    player->setVolume(15);
 }
 
 MineSweeper::~MineSweeper()
@@ -148,6 +152,11 @@ void MineSweeper::checkIfWon()
     }
     qDebug() << "Yes :)";
     mainWindow->gameFinished(true);
+}
+
+void MineSweeper::playSound()
+{
+    player->play();
 }
 
 

@@ -36,7 +36,6 @@ private slots:
     void updateTimer();
     void on_clearButton_clicked();
     void on_highscoreButton_clicked();
-
     void on_pauseButton_clicked();
 
 private:
@@ -46,17 +45,17 @@ private:
     QGraphicsScene *scene;
     MineSweeper *game;
     void createNewGame(int width, int height, int bombs);
-     QTimer* timer;
-     int seconds;
-     void displayTime(int time);
-     int bombDisplayCount;
-     void displayBombCount(int bombs);
-     void setGameValuesToEasy();
-     void setGameValuesToMedium();
-     void setGameValuesToHard();
-     bool allBombsMarked();
-     void setHighScore();
-     bool chooseNewGame();
+    QTimer* timer;
+    int seconds;
+    void displayTime(int time);
+    int bombDisplayCount;
+    void displayBombCount(int bombs);
+    void setGameValuesToEasy();
+    void setGameValuesToMedium();
+    void setGameValuesToHard();
+    bool allBombsMarked();
+    void setHighScore();
+    bool chooseNewGame();
 };
 
 #endif // MAINWINDOW_H

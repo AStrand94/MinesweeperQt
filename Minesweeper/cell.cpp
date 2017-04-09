@@ -180,6 +180,7 @@ void Cell::reveal()
     if(!pressed && !marked){
         pressed = true;
         if(isBomb()){
+            game->playSound();
             game->revealeAllBombs();
         }else if(surroundingBombs == 0)
             revealNeighbours();

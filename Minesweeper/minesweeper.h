@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QGraphicsScene>
 #include <exception>
+#include <QMediaPlayer>
 #include "cell.h"
 
 class MainWindow;
@@ -23,8 +24,10 @@ public:
     bool allBombsMarked();
     int getBombs();
     void checkIfWon();
+    void playSound();
 
 private:
+    QMediaPlayer *player;
     QGraphicsScene *scene;
     int bombCount, rows, cols, size = 20;
     void createBlankGrid();
