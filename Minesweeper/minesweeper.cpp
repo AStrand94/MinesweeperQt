@@ -24,7 +24,8 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,
     qDebug() << "cols " << columns;
     qDebug() << "bombs" << bombs;
     player = new QMediaPlayer;
-    player->setMedia(QUrl::fromLocalFile("/Users/stiangrim/MinesweeperQt/Minesweeper/bomb.mp3"));
+    player->setMedia(QUrl("https://raw.githubusercontent.com/AStrand94/MinesweeperQt/master/Minesweeper/"
+                          "bomb.mp3?token=AOnRZqB2OmSgyWMCQuxUJyXfrGRRnMNaks5Y819FwA%3D%3D"));
     player->setVolume(15);
 }
 
