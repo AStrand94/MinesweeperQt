@@ -26,11 +26,15 @@ public:
     void checkIfWon();
     void playSound();
     void setVolume(int);
+    void setImmortalMode(bool);
+    bool getImmortalMode();
+    void updateTimer(int);
 
 private:
     QMediaPlayer *player;
     QGraphicsScene *scene;
     int bombCount, rows, cols, size = 20;
+    bool immortalMode;
     void createBlankGrid();
     Cell ***grid;
     Cell ** allBombs;

@@ -97,11 +97,11 @@ void Cell::setNeighbours(Cell **informs)
 }
 
 void Cell::revealNeighbours(){
-        for(int i = 0; i < 8; i++){
-            if(neighbours[i] != NULL)
-                if( !neighbours[i]->pressed)
-                    neighbours[i]->reveal();
-        }
+    for(int i = 0; i < 8; i++){
+        if(neighbours[i] != NULL)
+            if( !neighbours[i]->pressed)
+                neighbours[i]->reveal();
+    }
 
 }
 
@@ -181,7 +181,11 @@ void Cell::reveal()
         pressed = true;
         if(isBomb()){
             game->playSound();
-            game->revealeAllBombs();
+            if(game->getImmortalMode() == false) {
+                game->revealeAllBombs();
+            } else {
+                game->updateTimer(10);
+            }
         }else if(surroundingBombs == 0)
             revealNeighbours();
 

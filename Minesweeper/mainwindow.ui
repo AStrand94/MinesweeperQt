@@ -91,7 +91,14 @@
     </property>
     <addaction name="actionMute"/>
    </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionImmortal"/>
+   </widget>
    <addaction name="menuSound"/>
+   <addaction name="menuOptions"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -108,6 +115,14 @@
    </property>
    <property name="text">
     <string>Mute</string>
+   </property>
+  </action>
+  <action name="actionImmortal">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Immortal</string>
    </property>
   </action>
  </widget>

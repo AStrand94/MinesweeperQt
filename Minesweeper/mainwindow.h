@@ -30,6 +30,7 @@ public:
     void increaseBombDisplayCount();
     void gameFinished(bool);
     void enablePauseButton(bool);
+    void updateTimer(int);
 
 
 
@@ -39,6 +40,8 @@ private slots:
     void on_highscoreButton_clicked();
     void on_pauseButton_clicked();
     void on_actionMute_triggered();
+
+    void on_actionImmortal_triggered();
 
 private:
     Highscore highscore;

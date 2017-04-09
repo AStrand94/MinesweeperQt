@@ -53,6 +53,12 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     ui->graphicsView->setEnabled(true);
     timer = new QTimer(this);
     if(ui->actionMute->isChecked()) game->setVolume(0);
+    if(ui->actionImmortal->isChecked()) {
+        game->setImmortalMode(true);
+    }
+    else {
+        game->setImmortalMode(false);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -218,6 +224,12 @@ void MainWindow::updateTimer(){
     displayTime(++seconds);
 }
 
+void MainWindow::updateTimer(int seconds)
+{
+    this->seconds += seconds;
+    displayTime(this->seconds);
+}
+
 void MainWindow::displayTime(int time){
     ui->lcdNumber->display(time);
 }
@@ -250,4 +262,16 @@ void MainWindow::on_pauseButton_clicked()
 void MainWindow::on_actionMute_triggered()
 {
     game->setVolume(0);
+}
+
+void MainWindow::on_actionImmortal_triggered()
+{
+    if(ui->actionImmortal->isChecked()) {
+        game->setImmortalMode(true);
+        QMessageBox::information(this, "Immortal Mode on", "Immortal Mode ON\n\nBombs will not kill you, but add time..");
+    }
+    else {
+        game->setImmortalMode(false);
+        QMessageBox::information(this, "Immortal Mode off", "Immortal Mode OFF\n\nBombs will kill you!");
+    }
 }

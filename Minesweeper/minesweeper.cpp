@@ -27,6 +27,7 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,
     player->setMedia(QUrl("https://raw.githubusercontent.com/AStrand94/MinesweeperQt/master/Minesweeper/"
                           "bomb.mp3?token=AOnRZqB2OmSgyWMCQuxUJyXfrGRRnMNaks5Y819FwA%3D%3D"));
     player->setVolume(15);
+    immortalMode = false;
 }
 
 MineSweeper::~MineSweeper()
@@ -158,12 +159,30 @@ void MineSweeper::checkIfWon()
 
 void MineSweeper::playSound()
 {
+    if(player->state() == 1) {
+        player->stop();
+    }
     player->play();
 }
 
 void MineSweeper::setVolume(int volume)
 {
     player->setVolume(volume);
+}
+
+void MineSweeper::setImmortalMode(bool modeOn)
+{
+    immortalMode = modeOn;
+}
+
+bool MineSweeper::getImmortalMode()
+{
+    return this->immortalMode;
+}
+
+void MineSweeper::updateTimer(int seconds)
+{
+    mainWindow->updateTimer(seconds);
 }
 
 
