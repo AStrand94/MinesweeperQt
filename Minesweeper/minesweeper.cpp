@@ -161,6 +161,11 @@ void MineSweeper::playSound()
     player->play();
 }
 
+void MineSweeper::setVolume(int volume)
+{
+    player->setVolume(volume);
+}
+
 
 void MineSweeper::revealeAllBombs(){
     if(!isBombsRevealed){

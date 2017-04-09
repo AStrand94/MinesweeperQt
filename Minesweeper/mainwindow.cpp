@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QStringList>
+#include <QSlider>
 #include "minesweeper.h"
 using namespace std;
 
@@ -51,6 +52,7 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     setFixedSize(ui->graphicsView->width()+20, ui->graphicsView->height()+100);
     ui->graphicsView->setEnabled(true);
     timer = new QTimer(this);
+    if(ui->actionMute->isChecked()) game->setVolume(0);
 }
 
 MainWindow::~MainWindow()
@@ -243,4 +245,9 @@ void MainWindow::on_pauseButton_clicked()
         timer->start();
         gamePaused = false;
     }
+}
+
+void MainWindow::on_actionMute_triggered()
+{
+    game->setVolume(0);
 }

@@ -25,6 +25,7 @@ public:
     int getBombs();
     void checkIfWon();
     void playSound();
+    void setVolume(int);
 
 private:
     QMediaPlayer *player;
