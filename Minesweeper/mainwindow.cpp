@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qInfo() << cols;
     setGameValuesToMedium();
     createNewGame(cols, rows, bombs);
+    ui->pauseButton->setEnabled(false);
 }
 
 void MainWindow::createNewGame(int cols, int rows, int bombs){
@@ -187,6 +188,7 @@ void MainWindow::gameFinished(bool fin){
     else
         text = "You failed...";
     ui->graphicsView->setEnabled(false);
+    ui->pauseButton->setEnabled(false);
     QMessageBox msg;
     msg.setText(text);
     msg.setWindowModality(Qt::WindowModal);
@@ -195,6 +197,10 @@ void MainWindow::gameFinished(bool fin){
     if(fin) setHighScore();
 }
 
+void MainWindow::enablePauseButton(bool boolean)
+{
+    ui->pauseButton->setEnabled(boolean);
+}
 
 void MainWindow::displayBombCount(int bombs){
     ui->lcdNumber_1->display(bombs);

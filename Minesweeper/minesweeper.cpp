@@ -42,6 +42,7 @@ void MineSweeper::firstIsPressed(Cell *cell)
     setBombsAround(cell);
 
     mainWindow->startTime();
+    mainWindow->enablePauseButton(true);
 
     Cell::firstPress = false;
 }

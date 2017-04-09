@@ -29,6 +29,7 @@ public:
     void decreaseBombDisplayCount();
     void increaseBombDisplayCount();
     void gameFinished(bool);
+    void enablePauseButton(bool);
 
 
 
