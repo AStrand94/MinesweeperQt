@@ -159,7 +159,7 @@ void MineSweeper::checkIfWon()
 
 void MineSweeper::playSound()
 {
-    if(player->state() == 1) {
+    if(immortalMode && player->state() == 1) {
         player->stop();
     }
     player->play();
