@@ -33,7 +33,7 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,
 MineSweeper::~MineSweeper()
 {
     deleteGrid();
-
+    delete player;
     scene = NULL;
 }
 
