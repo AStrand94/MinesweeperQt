@@ -36,3 +36,6 @@ HEADERS  += mainwindow.h \
     highscore.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    recources.qrc
