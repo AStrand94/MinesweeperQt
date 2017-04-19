@@ -9,10 +9,6 @@
 #include "cell.h"
 
 class MainWindow;
-
-#include "difficulty.h"
-
-using namespace diff;
 class MineSweeper
 {
 public:
@@ -44,7 +40,6 @@ private:
     bool isBombsRevealed = false;
     bool bombsAreSet = false;
     MainWindow* mainWindow;
-    Difficulty difficulty;
 
 };
 

@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>bomb.png</file>
+        <file>warning.png</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>bomb.mp3</file>
+    </qresource>
+    <qresource prefix="/documents">
+        <file>highscores.txt</file>
+    </qresource>
+</RCC>

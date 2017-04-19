@@ -36,26 +36,18 @@ MineSweeper *Cell::game;
 bool Cell::firstPress;
 
 void Cell::drawMarkedCell(QPainter* painter){
-    QBrush brush = Qt::yellow;
-    painter->fillRect(boundingRect(), brush);
-
-    painter->drawRect(boundingRect());
+    QImage wrn(":/images/warning.png", 0);
+    painter->drawImage(boundingRect(), wrn);
 }
 
 void Cell::drawBomb(QPainter* painter){
-    QBrush brush = Qt::red;
-    painter->fillRect(boundingRect(), brush);
-
-    painter->drawRect(boundingRect());
-
-
-
+    QImage bmb(":/images/bomb.png", 0);
+    painter->drawImage(boundingRect(), bmb);
 }
 
 void Cell::drawClickedCell(QPainter* painter){
     QBrush brush = Qt::white;
     painter->fillRect(boundingRect(), brush);
-
     painter->drawRect(boundingRect());
 }
 
