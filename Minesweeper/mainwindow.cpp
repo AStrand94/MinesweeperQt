@@ -261,7 +261,13 @@ void MainWindow::on_pauseButton_clicked()
 
 void MainWindow::on_actionMute_triggered()
 {
-    game->setVolume(0);
+
+    if(ui->actionMute->isChecked())
+        game->setVolume(0);
+
+    else
+        game->setVolume(15);
+
 }
 
 void MainWindow::on_actionImmortal_triggered()
