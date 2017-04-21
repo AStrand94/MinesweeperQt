@@ -146,7 +146,7 @@ bool MainWindow::chooseNewGame()
     bool accepted = false;
     QInputDialog *input = new QInputDialog;
     input->setWindowModality(Qt::WindowModal);
-    QString s = input->getItem(0,"TEST","Label:",list,-1,false,&accepted);
+    QString s = input->getItem(0,"Difficulty","Choose difficulty:",list,-1,false,&accepted);
 
     if(s == "") return false;
 
