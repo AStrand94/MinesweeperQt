@@ -29,6 +29,9 @@ MainWindow::MainWindow(QWidget *parent) :
     setGameValuesToMedium();
     createNewGame(cols, rows, bombs);
     ui->pauseButton->setEnabled(false);
+    pauseIcon();
+    highScoreIcon();
+    playIcon();
 }
 
 void MainWindow::createNewGame(int cols, int rows, int bombs){
@@ -72,6 +75,7 @@ void MainWindow::setGameValuesToMedium()
     rows = 24;
     bombs = 70;
     setWindowTitle("Medium");
+
 }
 
 void MainWindow::setGameValuesToEasy()
@@ -147,7 +151,6 @@ bool MainWindow::chooseNewGame()
     QInputDialog *input = new QInputDialog;
     input->setWindowModality(Qt::WindowModal);
     QString s = input->getItem(0,"Difficulty","Choose difficulty:",list,-1,false,&accepted);
-
     if(s == "") return false;
 
     if(list.indexOf(s) > -1){
@@ -191,13 +194,16 @@ void MainWindow::gameFinished(bool fin){
 
     timer->stop();
     QString text;
-    if(fin)
+    QMessageBox msg;
+    if(fin){
         text = "YOU MADE IT!";
-    else
+        msg.setIconPixmap(QPixmap(":/images/won.png"));
+    }else{
         text = "You failed...";
+        msg.setIconPixmap(QPixmap(":/images/lost.png"));
+    }
     ui->graphicsView->setEnabled(false);
     ui->pauseButton->setEnabled(false);
-    QMessageBox msg;
     msg.setText(text);
     msg.setWindowModality(Qt::WindowModal);
     msg.exec();
@@ -230,6 +236,34 @@ void MainWindow::updateTimer(int seconds)
     displayTime(this->seconds);
 }
 
+void MainWindow::playIcon(){
+    QPixmap pixmap(":/images/warning.png");
+    QIcon pauseButtonIcon(pixmap);
+    ui->clearButton->setIcon(pauseButtonIcon);
+    ui->clearButton->setIconSize(pixmap.rect().size());
+}
+
+void MainWindow::pauseIcon(){
+    QPixmap pixmap(":/images/warning.png");
+    QIcon pauseButtonIcon(pixmap);
+    ui->pauseButton->setIcon(pauseButtonIcon);
+    ui->pauseButton->setIconSize(pixmap.rect().size());
+}
+
+void MainWindow::resumeIcon(){
+    QPixmap pixmap(":/images/bomb.png");
+    QIcon resume(pixmap);
+    ui->pauseButton->setIcon(resume);
+    ui->pauseButton->setIconSize(pixmap.rect().size());
+}
+
+void MainWindow::highScoreIcon(){
+    QPixmap pixmap(":/images/warning.png");
+    QIcon pauseButtonIcon(pixmap);
+    ui->highscoreButton->setIcon(pauseButtonIcon);
+    ui->highscoreButton->setIconSize(pixmap.rect().size());
+}
+
 void MainWindow::displayTime(int time){
     ui->lcdNumber->display(time);
 }
@@ -245,6 +279,7 @@ void MainWindow::on_pauseButton_clicked()
             gamePaused = true;
             ui->pauseButton->setText("Resume");
             ui->pauseButton->setStyleSheet(QString("QPushButton {color: green;}"));
+            //resumeIcon();
             QMessageBox::information(this, "Paused", "Game paused!");
         } else {
             QMessageBox::information(this, "Information", "You need an active game in order to pause!");
@@ -252,6 +287,7 @@ void MainWindow::on_pauseButton_clicked()
     } else {
         ui->pauseButton->setText("Pause");
         ui->pauseButton->setStyleSheet(QString("QPushButton {color: none;}"));
+        pauseIcon();
         scene->setForegroundBrush(Qt::NoBrush);
         ui->graphicsView->setDisabled(false);
         timer->start();
@@ -261,13 +297,7 @@ void MainWindow::on_pauseButton_clicked()
 
 void MainWindow::on_actionMute_triggered()
 {
-
-    if(ui->actionMute->isChecked())
-        game->setVolume(0);
-
-    else
-        game->setVolume(15);
-
+    game->setVolume(0);
 }
 
 void MainWindow::on_actionImmortal_triggered()

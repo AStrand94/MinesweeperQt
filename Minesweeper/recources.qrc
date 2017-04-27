@@ -2,6 +2,10 @@
     <qresource prefix="/images">
         <file>bomb.png</file>
         <file>warning.png</file>
+        <file>flag-01.png</file>
+        <file>mine-01.png</file>
+        <file>lost.png</file>
+        <file>won.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>bomb.mp3</file>

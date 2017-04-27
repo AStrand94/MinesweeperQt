@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>717</height>
+    <height>723</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -25,14 +25,24 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+    background: #333333;
+    width: 10px; /* when vertical */
+    height: 10px; /* when horizontal */
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QGraphicsView" name="graphicsView">
       <property name="minimumSize">
        <size>
-        <width>600</width>
-        <height>600</height>
+        <width>1762</width>
+        <height>882</height>
        </size>
       </property>
       <property name="maximumSize">
@@ -41,15 +51,37 @@
         <height>600</height>
        </size>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QGraphicsView{
+	background-color: white;
+}</string>
+      </property>
      </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLCDNumber" name="lcdNumber"/>
+       <widget class="QLCDNumber" name="lcdNumber">
+        <property name="styleSheet">
+         <string notr="true">QLCDNumber{
+	color: white;
+    background-color: black;
+	border: 1px solid red;
+}</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="clearButton">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton:hover{ 
+background-color: grey;
+border-style: outset; 
+} </string>
+        </property>
         <property name="text">
          <string>New Game</string>
         </property>
@@ -70,7 +102,15 @@
        </widget>
       </item>
       <item>
-       <widget class="QLCDNumber" name="lcdNumber_1"/>
+       <widget class="QLCDNumber" name="lcdNumber_1">
+        <property name="styleSheet">
+         <string notr="true">QLCDNumber{
+    color: white;    
+    background-color: black;
+	border: 1px solid red;
+}</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -82,8 +122,29 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>22</height>
+     <height>16</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> QMenuBar {
+     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                       stop:0 lightgray, stop:1 darkgray);
+ }
+
+ QMenuBar::item {
+     spacing: 3px; /* spacing between menu bar items */
+     padding: 1px 4px;
+     background: transparent;
+     border-radius: 4px;
+ }
+
+ QMenuBar::item:selected { /* when selected using mouse or keyboard */
+     background: #a8a8a8;
+ }
+
+ QMenuBar::item:pressed {
+     background: #888888;
+ }</string>
    </property>
    <widget class="QMenu" name="menuSound">
     <property name="title">

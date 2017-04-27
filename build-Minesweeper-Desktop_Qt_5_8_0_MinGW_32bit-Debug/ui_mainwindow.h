@@ -52,9 +52,14 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(600, 717);
+        MainWindow->resize(600, 723);
         MainWindow->setMinimumSize(QSize(600, 700));
         MainWindow->setMaximumSize(QSize(624, 800));
+        MainWindow->setStyleSheet(QLatin1String("QMainWindow {\n"
+"    background: #333333;\n"
+"    width: 10px; /* when vertical */\n"
+"    height: 10px; /* when horizontal */\n"
+"}"));
         actionMute = new QAction(MainWindow);
         actionMute->setObjectName(QStringLiteral("actionMute"));
         actionMute->setCheckable(true);
@@ -63,14 +68,18 @@ public:
         actionImmortal->setCheckable(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        centralWidget->setStyleSheet(QStringLiteral(""));
         verticalLayout = new QVBoxLayout(centralWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setMinimumSize(QSize(600, 600));
+        graphicsView->setMinimumSize(QSize(1762, 882));
         graphicsView->setMaximumSize(QSize(600, 600));
+        graphicsView->setStyleSheet(QLatin1String("QGraphicsView{\n"
+"	background-color: white;\n"
+"}"));
 
         verticalLayout->addWidget(graphicsView);
 
@@ -79,11 +88,21 @@ public:
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         lcdNumber = new QLCDNumber(centralWidget);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
+        lcdNumber->setStyleSheet(QLatin1String("QLCDNumber{\n"
+"	color: white;\n"
+"    background-color: black;\n"
+"	border: 1px solid red;\n"
+"}"));
 
         horizontalLayout->addWidget(lcdNumber);
 
         clearButton = new QPushButton(centralWidget);
         clearButton->setObjectName(QStringLiteral("clearButton"));
+        clearButton->setEnabled(true);
+        clearButton->setStyleSheet(QLatin1String("QPushButton:hover{ \n"
+"background-color: grey;\n"
+"border-style: outset; \n"
+"} "));
 
         horizontalLayout->addWidget(clearButton);
 
@@ -99,6 +118,11 @@ public:
 
         lcdNumber_1 = new QLCDNumber(centralWidget);
         lcdNumber_1->setObjectName(QStringLiteral("lcdNumber_1"));
+        lcdNumber_1->setStyleSheet(QLatin1String("QLCDNumber{\n"
+"    color: white;    \n"
+"    background-color: black;\n"
+"	border: 1px solid red;\n"
+"}"));
 
         horizontalLayout->addWidget(lcdNumber_1);
 
@@ -108,7 +132,26 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 600, 22));
+        menuBar->setGeometry(QRect(0, 0, 600, 16));
+        menuBar->setStyleSheet(QLatin1String(" QMenuBar {\n"
+"     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,\n"
+"                                       stop:0 lightgray, stop:1 darkgray);\n"
+" }\n"
+"\n"
+" QMenuBar::item {\n"
+"     spacing: 3px; /* spacing between menu bar items */\n"
+"     padding: 1px 4px;\n"
+"     background: transparent;\n"
+"     border-radius: 4px;\n"
+" }\n"
+"\n"
+" QMenuBar::item:selected { /* when selected using mouse or keyboard */\n"
+"     background: #a8a8a8;\n"
+" }\n"
+"\n"
+" QMenuBar::item:pressed {\n"
+"     background: #888888;\n"
+" }"));
         menuSound = new QMenu(menuBar);
         menuSound->setObjectName(QStringLiteral("menuSound"));
         menuOptions = new QMenu(menuBar);

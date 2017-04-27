@@ -14,7 +14,7 @@ CXX           = g++
 DEFINES       = -DUNICODE -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -pipe -fno-keep-inline-dllexport -g -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -fno-keep-inline-dllexport -g -std=gnu++11 -frtti -Wall -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I..\Minesweeper -I. -IC:\Qt\5.8\mingw53_32\include -IC:\Qt\5.8\mingw53_32\include\QtMultimedia -IC:\Qt\5.8\mingw53_32\include\QtWidgets -IC:\Qt\5.8\mingw53_32\include\QtGui -IC:\Qt\5.8\mingw53_32\include\QtANGLE -IC:\Qt\5.8\mingw53_32\include\QtNetwork -IC:\Qt\5.8\mingw53_32\include\QtCore -Idebug -I. -IC:\Qt\5.8\mingw53_32\mkspecs\win32-g++ 
+INCPATH       = -I..\Minesweeper -I. -I..\Minesweeper -IC:\Qt\5.8\mingw53_32\include -IC:\Qt\5.8\mingw53_32\include\QtMultimedia -IC:\Qt\5.8\mingw53_32\include\QtWidgets -IC:\Qt\5.8\mingw53_32\include\QtGui -IC:\Qt\5.8\mingw53_32\include\QtANGLE -IC:\Qt\5.8\mingw53_32\include\QtNetwork -IC:\Qt\5.8\mingw53_32\include\QtCore -Idebug -I. -IC:\Qt\5.8\mingw53_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
 LIBS        =        -lmingw32 -LC:\Qt\5.8\mingw53_32\lib C:\Qt\5.8\mingw53_32\lib\libqtmaind.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 C:\Qt\5.8\mingw53_32\lib\libQt5Multimediad.a C:\Qt\5.8\mingw53_32\lib\libQt5Widgetsd.a C:\Qt\5.8\mingw53_32\lib\libQt5Guid.a C:\Qt\5.8\mingw53_32\lib\libQt5Networkd.a C:\Qt\5.8\mingw53_32\lib\libQt5Cored.a 
@@ -109,7 +109,12 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_recources.cpp
 debug/qrc_recources.cpp: ../Minesweeper/recources.qrc \
 		C:/Qt/5.8/mingw53_32/bin/rcc.exe \
-		../Minesweeper/bomb.png
+		../Minesweeper/bomb.png \
+		../Minesweeper/flag-01.png \
+		../Minesweeper/warning.png \
+		../Minesweeper/mine-01.png \
+		../Minesweeper/bomb.mp3 \
+		../Minesweeper/highscores.txt
 	C:\Qt\5.8\mingw53_32\bin\rcc.exe -name recources ..\Minesweeper\recources.qrc -o debug\qrc_recources.cpp
 
 compiler_moc_predefs_make_all: debug/moc_predefs.h
@@ -475,7 +480,7 @@ debug/moc_mainwindow.cpp: C:/Qt/5.8/mingw53_32/include/QtWidgets/QMainWindow \
 		../Minesweeper/mainwindow.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.8/mingw53_32/bin/moc.exe
-	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/Rep2017/Documents/MinesweeperQt/Minesweeper -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtMultimedia -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtNetwork -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Minesweeper\mainwindow.h -o debug\moc_mainwindow.cpp
+	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/Rep2017/Documents/MinesweeperQt/Minesweeper -IC:/Users/Rep2017/Documents/MinesweeperQt/Minesweeper -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtMultimedia -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtNetwork -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Minesweeper\mainwindow.h -o debug\moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1208,6 +1213,49 @@ debug/mainwindow.o: ../Minesweeper/mainwindow.cpp ../Minesweeper/mainwindow.h \
 		C:/Qt/5.8/mingw53_32/include/QtNetwork/qnetworkconfiguration.h \
 		../Minesweeper/highscore.h \
 		ui_mainwindow.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QAction \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qaction.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qactiongroup.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QApplication \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qapplication.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qdesktopwidget.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QButtonGroup \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QGraphicsView \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qscrollarea.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qframe.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QHBoxLayout \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qlayout.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QHeaderView \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qheaderview.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qstyleoption.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qslider.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qabstractslider.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qstyle.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qtabbar.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qrubberband.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QLCDNumber \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qlcdnumber.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QMenu \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qmenu.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QMenuBar \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qmenubar.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QPushButton \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qpushbutton.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QStatusBar \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qstatusbar.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QToolBar \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qtoolbar.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QVBoxLayout \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/QGraphicsGridLayout \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/qgraphicsgridlayout.h \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/qgraphicslayout.h \
@@ -1219,10 +1267,7 @@ debug/mainwindow.o: ../Minesweeper/mainwindow.cpp ../Minesweeper/mainwindow.h \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/QInputDialog \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/qinputdialog.h \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/qlineedit.h \
-		C:/Qt/5.8/mingw53_32/include/QtWidgets/qframe.h \
-		C:/Qt/5.8/mingw53_32/include/QtWidgets/QSlider \
-		C:/Qt/5.8/mingw53_32/include/QtWidgets/qslider.h \
-		C:/Qt/5.8/mingw53_32/include/QtWidgets/qabstractslider.h
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QSlider
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\Minesweeper\mainwindow.cpp
 
 debug/minesweeper.o: ../Minesweeper/minesweeper.cpp ../Minesweeper/minesweeper.h \

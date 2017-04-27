@@ -32,8 +32,6 @@ public:
     void enablePauseButton(bool);
     void updateTimer(int);
 
-
-
 private slots:
     void updateTimer();
     void on_clearButton_clicked();
@@ -61,6 +59,10 @@ private:
     bool allBombsMarked();
     void setHighScore();
     bool chooseNewGame();
+    void pauseIcon();
+    void resumeIcon();
+    void playIcon();
+    void highScoreIcon();
 };
 
 #endif // MAINWINDOW_H

@@ -4,6 +4,7 @@
 #include <QMessageBox>
 #include <minesweeper.h>
 
+
 Cell::Cell(int size){
     this->size = size;
 }
@@ -36,12 +37,16 @@ MineSweeper *Cell::game;
 bool Cell::firstPress;
 
 void Cell::drawMarkedCell(QPainter* painter){
-    QImage wrn(":/images/warning.png", 0);
+    QBrush brush = Qt::transparent;
+    painter->fillRect(boundingRect(), brush);
+    QImage wrn(":/images/flag-01.png", 0);
     painter->drawImage(boundingRect(), wrn);
 }
 
 void Cell::drawBomb(QPainter* painter){
-    QImage bmb(":/images/bomb.png", 0);
+    QBrush brush = Qt::transparent;
+    painter->fillRect(boundingRect(), brush);
+    QImage bmb(":/images/mine-01.png", 0);
     painter->drawImage(boundingRect(), bmb);
 }
 
@@ -52,9 +57,10 @@ void Cell::drawClickedCell(QPainter* painter){
 }
 
 void Cell::drawUnClickedCell(QPainter* painter){
-    QBrush brush = Qt::gray;
-    painter->fillRect(boundingRect(), brush);
-
+    QLinearGradient gradient(boundingRect().topLeft(), boundingRect().bottomRight());
+    gradient.setColorAt(0,Qt::lightGray);
+    gradient.setColorAt(1, Qt::darkGray);
+    painter->fillRect(boundingRect(), gradient);
     painter->drawRect(boundingRect());
 }
 
@@ -138,10 +144,28 @@ Cell **Cell::getNeighbours()
 
 void Cell::drawText(){
     double scaleSize = 1.0;
-
-    text.setPlainText(bomb?"B":surroundingBombs > 0 ? QString::number(surroundingBombs) : "");
+    switch (surroundingBombs) {
+    case 1: text.setDefaultTextColor(Qt::blue);
+        break;
+    case 2: text.setDefaultTextColor(Qt::darkGreen);
+        break;
+    case 3: text.setDefaultTextColor(Qt::red);
+        break;
+    case 4: text.setDefaultTextColor(Qt::darkBlue);
+        break;
+    case 5: text.setDefaultTextColor(Qt::darkRed);
+        break;
+    case 6: text.setDefaultTextColor(Qt::darkCyan);
+        break;
+    case 7: text.setDefaultTextColor(Qt::black);
+        break;
+    default:text.setDefaultTextColor(Qt::lightGray);
+        break;
+    }
+    text.setPlainText(bomb?"":surroundingBombs > 0 ? QString::number(surroundingBombs) : "");
+    text.setFont(QFont("arial",15));
     text.setScale(scaleSize);
-    text.setPos(0,0);
+    text.setPos(1,-2);
     text.setParentItem(this);
     text.show();
 
