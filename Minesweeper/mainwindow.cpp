@@ -146,7 +146,7 @@ bool MainWindow::chooseNewGame()
     bool accepted = false;
     QInputDialog *input = new QInputDialog;
     input->setWindowModality(Qt::WindowModal);
-    QString s = input->getItem(0,"TEST","Label:",list,-1,false,&accepted);
+    QString s = input->getItem(0,"Difficulty","Choose difficulty:",list,-1,false,&accepted);
 
     if(s == "") return false;
 
@@ -261,7 +261,13 @@ void MainWindow::on_pauseButton_clicked()
 
 void MainWindow::on_actionMute_triggered()
 {
-    game->setVolume(0);
+
+    if(ui->actionMute->isChecked())
+        game->setVolume(0);
+
+    else
+        game->setVolume(15);
+
 }
 
 void MainWindow::on_actionImmortal_triggered()
