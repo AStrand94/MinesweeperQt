@@ -13,11 +13,7 @@ using namespace std;
 
 //For Mac --> Will be put in
 // /Users/'YOUR_USER'/MinesweeperQt/build-Minesweeper-Desktop_Qt_5_8_0_clang_64bit-Debug/Minesweeper.app/Contents/MacOS/Minesweeper
-//const char *filename = "./highscores.txt";
-//const char *filename = ":/documents/highscores.txt";
-QString filename1(":/documents/highscores.txt");
-QByteArray b = filename1.toLatin1();
-const char *filename = b.data();
+const char *filename = "./highscores.txt";
 
 Highscore::Highscore()
 {
