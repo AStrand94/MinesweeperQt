@@ -99,10 +99,7 @@ public:
         clearButton = new QPushButton(centralWidget);
         clearButton->setObjectName(QStringLiteral("clearButton"));
         clearButton->setEnabled(true);
-        clearButton->setStyleSheet(QLatin1String("QPushButton:hover{ \n"
-"background-color: grey;\n"
-"border-style: outset; \n"
-"} "));
+        clearButton->setStyleSheet(QStringLiteral(""));
 
         horizontalLayout->addWidget(clearButton);
 

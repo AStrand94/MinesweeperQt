@@ -59,10 +59,6 @@ private:
     bool allBombsMarked();
     void setHighScore();
     bool chooseNewGame();
-    void pauseIcon();
-    void resumeIcon();
-    void playIcon();
-    void highScoreIcon();
 };
 
 #endif // MAINWINDOW_H

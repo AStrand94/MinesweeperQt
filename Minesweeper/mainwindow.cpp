@@ -29,9 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
     setGameValuesToMedium();
     createNewGame(cols, rows, bombs);
     ui->pauseButton->setEnabled(false);
-    pauseIcon();
-    highScoreIcon();
-    playIcon();
 }
 
 void MainWindow::createNewGame(int cols, int rows, int bombs){
@@ -235,34 +232,6 @@ void MainWindow::updateTimer(int seconds)
     displayTime(this->seconds);
 }
 
-void MainWindow::playIcon(){
-    QPixmap pixmap(":/images/warning.png");
-    QIcon pauseButtonIcon(pixmap);
-    ui->clearButton->setIcon(pauseButtonIcon);
-    ui->clearButton->setIconSize(pixmap.rect().size());
-}
-
-void MainWindow::pauseIcon(){
-    QPixmap pixmap(":/images/warning.png");
-    QIcon pauseButtonIcon(pixmap);
-    ui->pauseButton->setIcon(pauseButtonIcon);
-    ui->pauseButton->setIconSize(pixmap.rect().size());
-}
-
-void MainWindow::resumeIcon(){
-    QPixmap pixmap(":/images/bomb.png");
-    QIcon resume(pixmap);
-    ui->pauseButton->setIcon(resume);
-    ui->pauseButton->setIconSize(pixmap.rect().size());
-}
-
-void MainWindow::highScoreIcon(){
-    QPixmap pixmap(":/images/warning.png");
-    QIcon pauseButtonIcon(pixmap);
-    ui->highscoreButton->setIcon(pauseButtonIcon);
-    ui->highscoreButton->setIconSize(pixmap.rect().size());
-}
-
 void MainWindow::displayTime(int time){
     ui->lcdNumber->display(time);
 }
@@ -278,7 +247,6 @@ void MainWindow::on_pauseButton_clicked()
             gamePaused = true;
             ui->pauseButton->setText("Resume");
             ui->pauseButton->setStyleSheet(QString("QPushButton {color: green;}"));
-            //resumeIcon();
             QMessageBox::information(this, "Paused", "Game paused!");
         } else {
             QMessageBox::information(this, "Information", "You need an active game in order to pause!");
@@ -286,7 +254,6 @@ void MainWindow::on_pauseButton_clicked()
     } else {
         ui->pauseButton->setText("Pause");
         ui->pauseButton->setStyleSheet(QString("QPushButton {color: none;}"));
-        pauseIcon();
         scene->setForegroundBrush(Qt::NoBrush);
         ui->graphicsView->setDisabled(false);
         timer->start();
