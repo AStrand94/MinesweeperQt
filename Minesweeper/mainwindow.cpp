@@ -71,11 +71,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::setGameValuesToMedium()
 {
-    cols = 24;
-    rows = 24;
-    bombs = 70;
+    cols = 20;
+    rows = 20;
+    bombs = 50;
     setWindowTitle("Medium");
-
 }
 
 void MainWindow::setGameValuesToEasy()
@@ -88,9 +87,9 @@ void MainWindow::setGameValuesToEasy()
 
 void MainWindow::setGameValuesToHard()
 {
-    cols = 40;
-    rows = 40;
-    bombs = 450;
+    cols = 30;
+    rows = 30;
+    bombs = 170;
     setWindowTitle("Hard");
 }
 
@@ -121,7 +120,7 @@ void MainWindow::setHighScore()
     }
     if(highscore.newHighscore(d, time)) {
         bool ok;
-        QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
+        QString name = QInputDialog::getText(this, tr("Enter your name"),
                                              tr("Your name:"), QLineEdit::Normal,
                                              QDir::home().dirName(), &ok);
 
