@@ -81,7 +81,7 @@ void MainWindow::setGameValuesToEasy()
     bombs = 20;
     setWindowTitle("Easy");
     QFont smallxt = ui->clearButton->font();
-    smallxt.setPointSize(5);
+    smallxt.setPointSize(8);
     ui->clearButton->setFont(smallxt);
     ui->pauseButton->setFont(smallxt);
     ui->highscoreButton->setFont(smallxt);
