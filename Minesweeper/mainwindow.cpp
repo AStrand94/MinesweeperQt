@@ -66,12 +66,22 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setButtonText(int buttonSize)
+{
+    QFont smallxt = ui->clearButton->font();
+    smallxt.setPointSize(buttonSize);
+    ui->clearButton->setFont(smallxt);
+    ui->pauseButton->setFont(smallxt);
+    ui->highscoreButton->setFont(smallxt);
+}
+
 void MainWindow::setGameValuesToMedium()
 {
     cols = 20;
     rows = 20;
     bombs = 50;
     setWindowTitle("Medium");
+    setButtonText(13);
 }
 
 void MainWindow::setGameValuesToEasy()
@@ -80,11 +90,8 @@ void MainWindow::setGameValuesToEasy()
     rows = 15;
     bombs = 20;
     setWindowTitle("Easy");
-    QFont smallxt = ui->clearButton->font();
-    smallxt.setPointSize(8);
-    ui->clearButton->setFont(smallxt);
-    ui->pauseButton->setFont(smallxt);
-    ui->highscoreButton->setFont(smallxt);
+    setButtonText(8);
+
 }
 
 void MainWindow::setGameValuesToHard()
@@ -93,6 +100,7 @@ void MainWindow::setGameValuesToHard()
     rows = 30;
     bombs = 170;
     setWindowTitle("Hard");
+    setButtonText(13);
 }
 
 bool MainWindow::allBombsMarked()
@@ -282,3 +290,4 @@ void MainWindow::on_actionImmortal_triggered()
         QMessageBox::information(this, "Immortal Mode off", "Immortal Mode OFF\n\nBombs will kill you!");
     }
 }
+

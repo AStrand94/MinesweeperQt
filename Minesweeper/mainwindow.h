@@ -40,6 +40,7 @@ private slots:
     void on_actionMute_triggered();
 
     void on_actionImmortal_triggered();
+    void setButtonText(int);
 
 private:
     Highscore highscore;
