@@ -230,8 +230,3 @@ void Cell::mousePressEvent(QGraphicsSceneMouseEvent *e)
 
     QGraphicsItem::mousePressEvent(e);
 }
-
-/*void Cell::mouseReleaseEvent(QGraphicsSceneMouseEvent *e)
-{
-    QGraphicsItem::mouseReleaseEvent(e); //stopper visst utførelse av resten av funksjonen
-}*/

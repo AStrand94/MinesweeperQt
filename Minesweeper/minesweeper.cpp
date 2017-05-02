@@ -76,7 +76,6 @@ void MineSweeper::deleteGrid(){
     //and make the program crash
 
     for(int i = 0; i < rows; i++) delete[] grid[i];
-
     delete[] grid;
     if(allBombs != nullptr){
         delete[] allBombs;
@@ -96,13 +95,9 @@ void MineSweeper::createBlankGrid()
         for(int j = 0; j < cols; j++){
             grid[i][j] = new Cell(size);
             grid[i][j]->setPos(i*size,j*size);
-
-            //grid[i][j]->setGame(this);
-
             scene->addItem(grid[i][j]);
         }
     }
-    //grid[0][0]->setParent(this);
 }
 
 void MineSweeper::setBombsAround(Cell* cell)
