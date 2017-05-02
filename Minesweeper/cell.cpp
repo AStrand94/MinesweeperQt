@@ -41,6 +41,7 @@ void Cell::drawMarkedCell(QPainter* painter){
     painter->fillRect(boundingRect(), brush);
     QImage wrn(":/images/flag-01.png", 0);
     painter->drawImage(boundingRect(), wrn);
+    painter->drawRect(boundingRect());
 }
 
 void Cell::drawBomb(QPainter* painter){
@@ -48,10 +49,12 @@ void Cell::drawBomb(QPainter* painter){
     painter->fillRect(boundingRect(), brush);
     QImage bmb(":/images/mine-01.png", 0);
     painter->drawImage(boundingRect(), bmb);
+    painter->drawRect(boundingRect());
 }
 
 void Cell::drawClickedCell(QPainter* painter){
     QBrush brush = Qt::white;
+
     painter->fillRect(boundingRect(), brush);
     painter->drawRect(boundingRect());
 }
