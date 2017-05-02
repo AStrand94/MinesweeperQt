@@ -44,7 +44,7 @@ protected:
     //void mouseReleaseEvent(QGraphicsSceneMouseEvent *e);
 
 private:
-    int i,size;
+    int size;
     int surroundingBombs = 0;
     bool bomb = false;
     bool pressed = false;

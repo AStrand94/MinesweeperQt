@@ -39,10 +39,10 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     displayTime(seconds);
     displayBombCount(bombs);
     bombDisplayCount = bombs;
-    game = new MineSweeper(scene, bombs, rows, cols, this);
 
     //must be same as in minesweeper.h, TODO link them
-    int cellSize = 20;
+    cellSize = 20;
+    game = new MineSweeper(scene, bombs, rows, cols,cellSize, this);
 
     qDebug() << "Resizing scene";
     scene->setSceneRect(0, 0, cellSize*cols, cellSize*rows);
@@ -50,8 +50,10 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     ui->graphicsView->setFixedSize(cellSize*cols+10, cellSize*rows+10);
     qDebug() << "Resizing window";
     setFixedSize(ui->graphicsView->width()+20, ui->graphicsView->height()+100);
+
     ui->graphicsView->setEnabled(true);
     timer = new QTimer(this);
+
     if(ui->actionMute->isChecked()) game->setVolume(0);
     if(ui->actionImmortal->isChecked()) {
         game->setImmortalMode(true);
@@ -75,15 +77,6 @@ void MainWindow::setButtonText(int buttonSize)
     ui->highscoreButton->setFont(smallxt);
 }
 
-void MainWindow::setGameValuesToMedium()
-{
-    cols = 20;
-    rows = 20;
-    bombs = 50;
-    setWindowTitle("Medium");
-    setButtonText(13);
-}
-
 void MainWindow::setGameValuesToEasy()
 {
     cols = 15;
@@ -93,6 +86,16 @@ void MainWindow::setGameValuesToEasy()
     setButtonText(8);
 
 }
+
+void MainWindow::setGameValuesToMedium()
+{
+    cols = 20;
+    rows = 20;
+    bombs = 50;
+    setWindowTitle("Medium");
+    setButtonText(13);
+}
+
 
 void MainWindow::setGameValuesToHard()
 {

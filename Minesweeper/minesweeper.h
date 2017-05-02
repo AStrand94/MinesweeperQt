@@ -12,7 +12,7 @@ class MainWindow;
 class MineSweeper
 {
 public:
-    MineSweeper(QGraphicsScene*,int bombCount, int rows, int columns, MainWindow* mainWindow);
+    MineSweeper(QGraphicsScene*,int bombCount, int rows, int columns, int cellSize, MainWindow* mainWindow);
     ~MineSweeper();
     void firstIsPressed(Cell*);
     void revealeAllBombs();
@@ -29,7 +29,7 @@ public:
 private:
     QMediaPlayer *player;
     QGraphicsScene *scene;
-    int bombCount, rows, cols, size = 20;
+    int bombCount, rows, cols, size;
     bool immortalMode;
     void createBlankGrid();
     Cell ***grid;

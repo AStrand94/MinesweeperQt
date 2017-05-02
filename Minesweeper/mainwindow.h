@@ -44,7 +44,7 @@ private slots:
 
 private:
     Highscore highscore;
-    int rows, cols, size,bombs;
+    int rows, cols, size,bombs, cellSize;
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     MineSweeper *game;

@@ -5,7 +5,7 @@
 #include <mainwindow.h>
 #include <QMediaPlayer>
 
-MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns, MainWindow* mainWindow)
+MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,int cellSize, MainWindow* mainWindow)
 {
     //if(bombs > rows*columns)   --->>> THROW EXCEPTION??
     if(bombs > rows*columns) bombs = rows*columns -1;
@@ -15,7 +15,7 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,
     this->rows = rows;
     this->cols = columns;
     this->mainWindow = mainWindow;
-    //this->size = cellsize;
+    this->size = cellSize;
     createBlankGrid();
     setNeighbours();
     Cell::firstPress = true;
