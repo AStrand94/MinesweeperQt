@@ -12,6 +12,7 @@
 #include <QInputDialog>
 #include <QStringList>
 #include <QSlider>
+#include <QShortcut>
 #include "minesweeper.h"
 using namespace std;
 
@@ -29,6 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
     setGameValuesToMedium();
     createNewGame(cols, rows, bombs);
     ui->pauseButton->setEnabled(false);
+
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_N), this, SLOT(on_clearButton_clicked()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_P), this, SLOT(on_gamePauseShortcutPressed()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this, SLOT(on_highscoreButton_clicked()));
 }
 
 void MainWindow::createNewGame(int cols, int rows, int bombs){
@@ -250,6 +255,12 @@ void MainWindow::updateTimer(int seconds)
 
 void MainWindow::displayTime(int time){
     ui->lcdNumber->display(time);
+}
+
+
+void MainWindow::on_gamePauseShortcutPressed(){
+    if(ui->pauseButton->isEnabled())
+        on_pauseButton_clicked();
 }
 
 void MainWindow::on_pauseButton_clicked()

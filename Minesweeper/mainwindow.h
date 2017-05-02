@@ -37,6 +37,7 @@ private slots:
     void on_clearButton_clicked();
     void on_highscoreButton_clicked();
     void on_pauseButton_clicked();
+    void on_gamePauseShortcutPressed();
     void on_actionMute_triggered();
 
     void on_actionImmortal_triggered();
