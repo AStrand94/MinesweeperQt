@@ -184,6 +184,10 @@ void MineSweeper::updateTimer(int seconds)
     mainWindow->updateTimer(seconds);
 }
 
+void MineSweeper::decreaseBombDisplayCount()
+{
+    mainWindow->decreaseBombDisplayCount();
+}
 
 void MineSweeper::revealeAllBombs(){
     if(!isBombsRevealed){

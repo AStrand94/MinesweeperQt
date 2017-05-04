@@ -25,6 +25,7 @@ public:
     void setImmortalMode(bool);
     bool getImmortalMode();
     void updateTimer(int);
+    void decreaseBombDisplayCount();
 
 private:
     QMediaPlayer *player;
