@@ -34,6 +34,34 @@ MainWindow::MainWindow(QWidget *parent) :
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_N), this, SLOT(on_clearButton_clicked()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_P), this, SLOT(on_gamePauseShortcutPressed()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this, SLOT(on_highscoreButton_clicked()));
+
+}
+
+void MainWindow::setupConnections()
+{
+    connect(
+                game, &MineSweeper::bombMarked,
+                this, &MainWindow::decreaseBombDisplayCount
+                );
+    connect(
+                game, &MineSweeper::bombUnMarked,
+                this, &MainWindow::increaseBombDisplayCount
+                );
+
+    connect(
+                game, &MineSweeper::addToTimer,
+                this, &MainWindow::addToTimer
+                );
+
+    connect(
+                game, &MineSweeper::gameOver,
+                this, &MainWindow::gameFinished
+                );
+
+    connect(
+                game, &MineSweeper::gameStarted,
+                this, &MainWindow::startTime
+                );
 }
 
 void MainWindow::createNewGame(int cols, int rows, int bombs){
@@ -47,7 +75,10 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
 
     //must be same as in minesweeper.h, TODO link them
     cellSize = 20;
-    game = new MineSweeper(scene, bombs, rows, cols,cellSize, this);
+    game = new MineSweeper(scene, bombs, rows, cols,cellSize);
+
+    setupConnections();
+
 
     qDebug() << "Resizing scene";
     scene->setSceneRect(0, 0, cellSize*cols, cellSize*rows);
@@ -241,13 +272,14 @@ void MainWindow::startTime(){
     //timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
     timer->start(1000);
+    enablePauseButton(true);
 }
 
 void MainWindow::updateTimer(){
     displayTime(++seconds);
 }
 
-void MainWindow::updateTimer(int seconds)
+void MainWindow::addToTimer(int seconds)
 {
     this->seconds += seconds;
     displayTime(this->seconds);

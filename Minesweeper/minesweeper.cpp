@@ -2,10 +2,9 @@
 #include "minesweeper.h"
 #include "cell.h"
 #include <ctime>
-#include <mainwindow.h>
 #include <QMediaPlayer>
 
-MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,int cellSize, MainWindow* mainWindow)
+MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,int cellSize)
 {
     //if(bombs > rows*columns)   --->>> THROW EXCEPTION??
     if(bombs > rows*columns) bombs = rows*columns -1;
@@ -14,7 +13,7 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,
     allBombs = new Cell*[bombCount];
     this->rows = rows;
     this->cols = columns;
-    this->mainWindow = mainWindow;
+
     this->size = cellSize;
     createBlankGrid();
     setNeighbours();
@@ -41,17 +40,16 @@ void MineSweeper::firstIsPressed(Cell *cell)
     qDebug() << "setting bombs everywere, but not on cell or cells neighbours";
     setBombsAround(cell);
 
-    mainWindow->startTime();
-    mainWindow->enablePauseButton(true);
+    emit gameStarted();
 
     Cell::firstPress = false;
 }
 
 void MineSweeper::onCellMarked(bool marked){
     if(!marked)
-        mainWindow->increaseBombDisplayCount();
+        emit bombUnMarked();
     else
-        mainWindow->decreaseBombDisplayCount();
+        emit bombMarked();
 }
 
 bool MineSweeper::allBombsMarked()
@@ -148,7 +146,7 @@ void MineSweeper::checkIfWon()
         }
     }
     qDebug() << "Yes :)";
-    mainWindow->gameFinished(true);
+    emit gameOver(true);
 }
 
 void MineSweeper::playSound()
@@ -176,12 +174,12 @@ bool MineSweeper::getImmortalMode()
 
 void MineSweeper::updateTimer(int seconds)
 {
-    mainWindow->updateTimer(seconds);
+    emit addToTimer(seconds);
 }
 
 void MineSweeper::decreaseBombDisplayCount()
 {
-    mainWindow->decreaseBombDisplayCount();
+    emit bombMarked();
 }
 
 void MineSweeper::revealeAllBombs(){
@@ -191,7 +189,7 @@ void MineSweeper::revealeAllBombs(){
             allBombs[i]->reveal();
         }
 
-        mainWindow->gameFinished(false);
+        emit gameOver(false);
     }
 }
 

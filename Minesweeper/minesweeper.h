@@ -8,11 +8,13 @@
 #include <QMediaPlayer>
 #include "cell.h"
 
-class MainWindow;
-class MineSweeper
+
+class MineSweeper : public QObject
 {
+Q_OBJECT
+
 public:
-    MineSweeper(QGraphicsScene*,int bombCount, int rows, int columns, int cellSize, MainWindow* mainWindow);
+    MineSweeper(QGraphicsScene*,int bombCount, int rows, int columns, int cellSize);
     ~MineSweeper();
     void firstIsPressed(Cell*);
     void revealeAllBombs();
@@ -27,6 +29,13 @@ public:
     void updateTimer(int);
     void decreaseBombDisplayCount();
 
+signals:
+    void bombMarked();
+    void bombUnMarked();
+    void addToTimer(int);
+    void gameOver(bool);
+    void gameStarted();
+
 private:
     QMediaPlayer *player;
     QGraphicsScene *scene;
@@ -40,8 +49,6 @@ private:
     void setBombsAround(Cell* cell);
     bool isBombsRevealed = false;
     bool bombsAreSet = false;
-    MainWindow* mainWindow;
-
 };
 
 #endif // MINESWEEPER_H

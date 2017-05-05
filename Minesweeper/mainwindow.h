@@ -25,12 +25,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void startTime();
-    void decreaseBombDisplayCount();
-    void increaseBombDisplayCount();
-    void gameFinished(bool);
     void enablePauseButton(bool);
-    void updateTimer(int);
+
 
 private slots:
     void updateTimer();
@@ -42,6 +38,12 @@ private slots:
 
     void on_actionImmortal_triggered();
     void setButtonText(int);
+
+    void decreaseBombDisplayCount();
+    void increaseBombDisplayCount();
+    void addToTimer(int);
+    void gameFinished(bool);
+    void startTime();
 
 private:
     Highscore highscore;
@@ -61,6 +63,7 @@ private:
     bool allBombsMarked();
     void setHighScore();
     bool chooseNewGame();
+    void setupConnections();
 };
 
 #endif // MAINWINDOW_H
