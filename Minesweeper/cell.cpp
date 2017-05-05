@@ -204,6 +204,7 @@ void Cell::reveal()
                 game->revealeAllBombs();
             } else {
                 game->updateTimer(10);
+                game->decreaseBombDisplayCount();
             }
         }else if(surroundingBombs == 0)
             revealNeighbours();
