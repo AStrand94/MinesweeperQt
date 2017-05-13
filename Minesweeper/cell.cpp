@@ -146,7 +146,8 @@ Cell **Cell::getNeighbours()
 }
 
 void Cell::drawText(){
-    double scaleSize = 1.0;
+
+    double scaleSize = size/20; // apparently scalesize 1 fits a 20x20 square perfectly
     switch (surroundingBombs) {
     case 1: text.setDefaultTextColor(Qt::blue);
         break;

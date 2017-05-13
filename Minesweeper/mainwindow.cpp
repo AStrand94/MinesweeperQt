@@ -22,10 +22,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
     gamePaused = false;
     ui->setupUi(this);
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
+
     qInfo() << cols;
     setGameValuesToMedium();
     createNewGame(cols, rows, bombs);
@@ -73,7 +75,6 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     displayBombCount(bombs);
     bombDisplayCount = bombs;
 
-    //must be same as in minesweeper.h, TODO link them
     cellSize = 20;
     game = new MineSweeper(scene, bombs, rows, cols,cellSize);
 
