@@ -70,6 +70,7 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     delete game;
     if(timer != nullptr)
         delete timer;
+    gamePaused = false;
     seconds = 0;
     displayTime(seconds);
     displayBombCount(bombs);
@@ -214,6 +215,7 @@ bool MainWindow::chooseNewGame()
 
         }
     }
+    scene->setForegroundBrush(Qt::NoBrush);
     delete input;
     return true;
 }
