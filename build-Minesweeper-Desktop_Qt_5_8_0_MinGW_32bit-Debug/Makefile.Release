@@ -118,9 +118,8 @@ release/qrc_recources.cpp: ../Minesweeper/recources.qrc \
 		../Minesweeper/help-128_10x10.png \
 		../Minesweeper/30_Sound_off-128_10x10.png \
 		../Minesweeper/flag-01.png \
-		../Minesweeper/MS_rules_controls_400x400.png \
+		../Minesweeper/Rules_Controls_2.png \
 		../Minesweeper/lost.png \
-		../Minesweeper/MS_rules_controls.png \
 		../Minesweeper/29_Sound_alt-128_10x10.png \
 		../Minesweeper/sign-off-128_10x10.png \
 		../Minesweeper/won.png \

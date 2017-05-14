@@ -353,7 +353,7 @@ void MainWindow::on_actionImmortal_triggered(){
 void MainWindow::on_actionGame_Rules_and_Controls_triggered(){
     timer->stop();
     QMessageBox msg;
-    msg.setIconPixmap(QPixmap(":/images/Rules_Controls_2.png"));
+    msg.setIconPixmap(QPixmap(":/images/Rules_Controls_2_400x400.png"));
     msg.setWindowModality(Qt::WindowModal);
     if(msg.exec())timer->start();
 }
