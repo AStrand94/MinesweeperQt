@@ -33,6 +33,7 @@ class Ui_MainWindow
 public:
     QAction *actionMute;
     QAction *actionImmortal;
+    QAction *actionGame_Rules_and_Controls;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QGraphicsView *graphicsView;
@@ -66,6 +67,8 @@ public:
         actionImmortal = new QAction(MainWindow);
         actionImmortal->setObjectName(QStringLiteral("actionImmortal"));
         actionImmortal->setCheckable(true);
+        actionGame_Rules_and_Controls = new QAction(MainWindow);
+        actionGame_Rules_and_Controls->setObjectName(QStringLiteral("actionGame_Rules_and_Controls"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         centralWidget->setStyleSheet(QStringLiteral(""));
@@ -164,7 +167,8 @@ public:
         menuBar->addAction(menuSound->menuAction());
         menuBar->addAction(menuOptions->menuAction());
         menuSound->addAction(actionMute);
-        menuOptions->addAction(actionImmortal);
+        menuSound->addAction(actionImmortal);
+        menuOptions->addAction(actionGame_Rules_and_Controls);
 
         retranslateUi(MainWindow);
 
@@ -175,12 +179,16 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
         actionMute->setText(QApplication::translate("MainWindow", "Mute", Q_NULLPTR));
-        actionImmortal->setText(QApplication::translate("MainWindow", "Immortal", Q_NULLPTR));
+        actionImmortal->setText(QApplication::translate("MainWindow", "Immortal Mode", Q_NULLPTR));
+#ifndef QT_NO_TOOLTIP
+        actionImmortal->setToolTip(QApplication::translate("MainWindow", "Immortal", Q_NULLPTR));
+#endif // QT_NO_TOOLTIP
+        actionGame_Rules_and_Controls->setText(QApplication::translate("MainWindow", "Game Rules and Controls", Q_NULLPTR));
         clearButton->setText(QApplication::translate("MainWindow", "New Game", Q_NULLPTR));
         pauseButton->setText(QApplication::translate("MainWindow", "Pause", Q_NULLPTR));
         highscoreButton->setText(QApplication::translate("MainWindow", "Highscores", Q_NULLPTR));
-        menuSound->setTitle(QApplication::translate("MainWindow", "Sound", Q_NULLPTR));
-        menuOptions->setTitle(QApplication::translate("MainWindow", "Options", Q_NULLPTR));
+        menuSound->setTitle(QApplication::translate("MainWindow", "Options", Q_NULLPTR));
+        menuOptions->setTitle(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
     } // retranslateUi
 
 };

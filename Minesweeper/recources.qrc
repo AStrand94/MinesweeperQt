@@ -6,6 +6,8 @@
         <file>mine-01.png</file>
         <file>lost.png</file>
         <file>won.png</file>
+        <file>MS_rules_controls.png</file>
+        <file>MS_rules_controls_400x400.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>bomb.mp3</file>

@@ -145,15 +145,16 @@
    </property>
    <widget class="QMenu" name="menuSound">
     <property name="title">
-     <string>Sound</string>
+     <string>Options</string>
     </property>
     <addaction name="actionMute"/>
+    <addaction name="actionImmortal"/>
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
-     <string>Options</string>
+     <string>Help</string>
     </property>
-    <addaction name="actionImmortal"/>
+    <addaction name="actionGame_Rules_and_Controls"/>
    </widget>
    <addaction name="menuSound"/>
    <addaction name="menuOptions"/>
@@ -180,7 +181,15 @@
     <bool>true</bool>
    </property>
    <property name="text">
+    <string>Immortal Mode</string>
+   </property>
+   <property name="toolTip">
     <string>Immortal</string>
+   </property>
+  </action>
+  <action name="actionGame_Rules_and_Controls">
+   <property name="text">
+    <string>Game Rules and Controls</string>
    </property>
   </action>
  </widget>

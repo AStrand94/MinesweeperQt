@@ -9,6 +9,7 @@
 #include "cell.h"
 #include "minesweeper.h"
 #include <highscore.h>
+#include <qmessagebox.h>
 //#include "difficulty.h"
 
 using namespace std;
@@ -35,8 +36,8 @@ private slots:
     void on_pauseButton_clicked();
     void on_gamePauseShortcutPressed();
     void on_actionMute_triggered();
-
     void on_actionImmortal_triggered();
+    void on_actionGame_Rules_and_Controls_triggered();
     void setButtonText(int);
 
     void decreaseBombDisplayCount();

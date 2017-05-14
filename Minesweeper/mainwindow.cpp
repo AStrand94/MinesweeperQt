@@ -22,12 +22,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
     gamePaused = false;
     ui->setupUi(this);
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
-
     qInfo() << cols;
     setGameValuesToMedium();
     createNewGame(cols, rows, bombs);
@@ -71,11 +69,13 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     if(timer != nullptr)
         delete timer;
     gamePaused = false;
+    //game->setImmortalMode(false);
     seconds = 0;
     displayTime(seconds);
     displayBombCount(bombs);
     bombDisplayCount = bombs;
 
+    //must be same as in minesweeper.h, TODO link them
     cellSize = 20;
     game = new MineSweeper(scene, bombs, rows, cols,cellSize);
 
@@ -328,15 +328,28 @@ void MainWindow::on_actionMute_triggered()
     game->setVolume(0);
 }
 
-void MainWindow::on_actionImmortal_triggered()
-{
+void MainWindow::on_actionImmortal_triggered(){
+    QMessageBox msg;
+    timer->stop();
     if(ui->actionImmortal->isChecked()) {
         game->setImmortalMode(true);
-        QMessageBox::information(this, "Immortal Mode on", "Immortal Mode ON\n\nBombs will not kill you, but add time..");
-    }
-    else {
+        msg.setWindowTitle("ON");
+        msg.setText("Immortal Mode ON!\n\nBombs will not kill you, but add time..");
+    }else {
         game->setImmortalMode(false);
-        QMessageBox::information(this, "Immortal Mode off", "Immortal Mode OFF\n\nBombs will kill you!");
+         msg.setWindowTitle("OFF");
+        msg.setText("Immortal Mode OFF!\n\nBombs will kill you!");
     }
+    if(msg.exec())timer->start();
 }
+
+void MainWindow::on_actionGame_Rules_and_Controls_triggered(){
+    timer->stop();
+    QMessageBox msg;
+    msg.setIconPixmap(QPixmap(":/images/MS_rules_controls_400x400.png"));
+    msg.setWindowModality(Qt::WindowModal);
+    if(msg.exec())timer->start();
+}
+
+//actionGame_Rules_and_Controls
 
