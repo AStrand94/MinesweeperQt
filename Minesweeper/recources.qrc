@@ -11,6 +11,7 @@
         <file>sign-check-128_10x10.png</file>
         <file>sign-off-128_10x10.png</file>
         <file>help-128_10x10.png</file>
+        <file>Rules_Controls_2.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>bomb.mp3</file>

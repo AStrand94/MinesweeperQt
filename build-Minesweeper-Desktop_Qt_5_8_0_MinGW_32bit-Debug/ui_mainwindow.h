@@ -143,7 +143,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 600, 44));
+        menuBar->setGeometry(QRect(0, 0, 600, 16));
         menuBar->setStyleSheet(QLatin1String(" QMenuBar {\n"
 "     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,\n"
 "                                       stop:0 lightgray, stop:1 darkgray);\n"
@@ -194,6 +194,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         actionImmortal->setToolTip(QApplication::translate("MainWindow", "Immortal", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
+        actionImmortal->setShortcut(QApplication::translate("MainWindow", "Ctrl+I", Q_NULLPTR));
         actionGame_Rules_and_Controls->setText(QApplication::translate("MainWindow", "Game Rules and Controls", Q_NULLPTR));
         clearButton->setText(QApplication::translate("MainWindow", "New Game", Q_NULLPTR));
         pauseButton->setText(QApplication::translate("MainWindow", "Pause", Q_NULLPTR));

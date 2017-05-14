@@ -27,7 +27,7 @@ public:
     ~MainWindow();
 
     void enablePauseButton(bool);
-    int imTimes;
+    bool immortal;
 
 
 private slots:
