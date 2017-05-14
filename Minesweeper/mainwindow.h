@@ -45,7 +45,7 @@ private slots:
     void addToTimer(int);
     void gameFinished(bool);
     void startTime();
-
+    void toggleImmortalMode();
 private:
     Highscore highscore;
     int rows, cols, size,bombs, cellSize;

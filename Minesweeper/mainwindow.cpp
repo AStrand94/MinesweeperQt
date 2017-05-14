@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_N), this, SLOT(on_clearButton_clicked()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_P), this, SLOT(on_gamePauseShortcutPressed()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this, SLOT(on_highscoreButton_clicked()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_I), this, SLOT(toggleImmortalMode()));
 
 }
 
@@ -326,6 +327,10 @@ void MainWindow::on_pauseButton_clicked()
 void MainWindow::on_actionMute_triggered()
 {
     game->setVolume(0);
+}
+void MainWindow::toggleImmortalMode(){
+    ui->actionImmortal->setChecked(!ui->actionImmortal->isChecked());
+    on_actionImmortal_triggered();
 }
 
 void MainWindow::on_actionImmortal_triggered(){
