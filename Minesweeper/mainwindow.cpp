@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    setWindowIcon(QIcon(":/images/mine-01.png"));
     gamePaused = false;
     ui->setupUi(this);
     scene = new QGraphicsScene(this);
@@ -34,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_N), this, SLOT(on_clearButton_clicked()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_P), this, SLOT(on_gamePauseShortcutPressed()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this, SLOT(on_highscoreButton_clicked()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_I), this, SLOT(on_actionImmortal_triggered()));
 
 }
 
@@ -74,6 +76,7 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     displayTime(seconds);
     displayBombCount(bombs);
     bombDisplayCount = bombs;
+    imTimes = 0;
 
     //must be same as in minesweeper.h, TODO link them
     cellSize = 20;
@@ -331,14 +334,17 @@ void MainWindow::on_actionMute_triggered()
 void MainWindow::on_actionImmortal_triggered(){
     QMessageBox msg;
     timer->stop();
+    if(imTimes == 0)ui->actionImmortal->setChecked(true);
+    imTimes++;
     if(ui->actionImmortal->isChecked()) {
-        game->setImmortalMode(true);
         msg.setWindowTitle("ON");
         msg.setText("Immortal Mode ON!\n\nBombs will not kill you, but add time..");
-    }else {
+        ui->actionImmortal->setChecked(false);
+    }else{
         game->setImmortalMode(false);
-         msg.setWindowTitle("OFF");
+        msg.setWindowTitle("OFF");
         msg.setText("Immortal Mode OFF!\n\nBombs will kill you!");
+        ui->actionImmortal->setChecked(true);
     }
     if(msg.exec())timer->start();
 }

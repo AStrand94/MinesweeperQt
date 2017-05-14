@@ -119,7 +119,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>16</height>
+     <height>44</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -172,6 +172,11 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="recources.qrc">
+     <normaloff>:/images/29_Sound_alt-128_10x10.png</normaloff>
+     <normalon>:/images/30_Sound_off-128_10x10.png</normalon>:/images/29_Sound_alt-128_10x10.png</iconset>
+   </property>
    <property name="text">
     <string>Mute</string>
    </property>
@@ -179,6 +184,11 @@
   <action name="actionImmortal">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recources.qrc">
+     <normaloff>:/images/sign-off-128_10x10.png</normaloff>
+     <normalon>:/images/sign-check-128_10x10.png</normalon>:/images/sign-off-128_10x10.png</iconset>
    </property>
    <property name="text">
     <string>Immortal Mode</string>
@@ -188,12 +198,18 @@
    </property>
   </action>
   <action name="actionGame_Rules_and_Controls">
+   <property name="icon">
+    <iconset resource="recources.qrc">
+     <normaloff>:/images/help-128_10x10.png</normaloff>:/images/help-128_10x10.png</iconset>
+   </property>
    <property name="text">
     <string>Game Rules and Controls</string>
    </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="recources.qrc"/>
+ </resources>
  <connections/>
 </ui>

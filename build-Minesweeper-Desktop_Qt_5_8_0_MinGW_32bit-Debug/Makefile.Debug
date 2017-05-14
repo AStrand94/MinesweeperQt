@@ -17,13 +17,13 @@ CXXFLAGS      = -pipe -fno-keep-inline-dllexport -g -std=gnu++11 -frtti -Wall -W
 INCPATH       = -I..\Minesweeper -I. -I..\Minesweeper -IC:\Qt\5.8\mingw53_32\include -IC:\Qt\5.8\mingw53_32\include\QtMultimedia -IC:\Qt\5.8\mingw53_32\include\QtWidgets -IC:\Qt\5.8\mingw53_32\include\QtGui -IC:\Qt\5.8\mingw53_32\include\QtANGLE -IC:\Qt\5.8\mingw53_32\include\QtNetwork -IC:\Qt\5.8\mingw53_32\include\QtCore -Idebug -I. -IC:\Qt\5.8\mingw53_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        -lmingw32 -LC:\Qt\5.8\mingw53_32\lib C:\Qt\5.8\mingw53_32\lib\libqtmaind.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 C:\Qt\5.8\mingw53_32\lib\libQt5Multimediad.a C:\Qt\5.8\mingw53_32\lib\libQt5Widgetsd.a C:\Qt\5.8\mingw53_32\lib\libQt5Guid.a C:\Qt\5.8\mingw53_32\lib\libQt5Networkd.a C:\Qt\5.8\mingw53_32\lib\libQt5Cored.a 
+LIBS        =        -lmingw32 -LC:\Qt\5.8\mingw53_32\lib C:\Qt\5.8\mingw53_32\lib\libqtmaind.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 C:\Qt\5.8\mingw53_32\lib\libQt5Multimediad.a C:\Qt\5.8\mingw53_32\lib\libQt5Widgetsd.a C:\Qt\5.8\mingw53_32\lib\libQt5Guid.a C:\Qt\5.8\mingw53_32\lib\libQt5Networkd.a C:\Qt\5.8\mingw53_32\lib\libQt5Cored.a debug\minesweeper_res.o 
 QMAKE         = C:\Qt\5.8\mingw53_32\bin\qmake.exe
 IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\minesweeper_res.o
 COPY          = copy /y
 SED           = $(QMAKE) -install sed
 COPY_FILE     = copy /y
@@ -77,8 +77,11 @@ DESTDIR_TARGET = debug\Minesweeper.exe
 first: all
 all: Makefile.Debug  $(DESTDIR_TARGET)
 
-$(DESTDIR_TARGET): ui_mainwindow.h $(OBJECTS) 
+$(DESTDIR_TARGET): ui_mainwindow.h $(OBJECTS) debug/minesweeper_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
+
+debug/minesweeper_res.o: ../Minesweeper/minesweeper.rc
+	windres -i ..\Minesweeper\minesweeper.rc -o debug\minesweeper_res.o --include-dir=./../Minesweeper $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\Minesweeper\Minesweeper.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -90,6 +93,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) debug\main.o debug\mainwindow.o debug\minesweeper.o debug\cell.o debug\highscore.o debug\qrc_recources.o debug\moc_mainwindow.o debug\moc_minesweeper.o
+	-$(DEL_FILE) debug\minesweeper_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -111,12 +115,17 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_recources.cpp
 debug/qrc_recources.cpp: ../Minesweeper/recources.qrc \
 		C:/Qt/5.8/mingw53_32/bin/rcc.exe \
-		../Minesweeper/bomb.png \
+		../Minesweeper/help-128_10x10.png \
+		../Minesweeper/30_Sound_off-128_10x10.png \
 		../Minesweeper/flag-01.png \
-		../Minesweeper/warning.png \
+		../Minesweeper/MS_rules_controls_400x400.png \
 		../Minesweeper/lost.png \
+		../Minesweeper/MS_rules_controls.png \
+		../Minesweeper/29_Sound_alt-128_10x10.png \
+		../Minesweeper/sign-off-128_10x10.png \
 		../Minesweeper/won.png \
 		../Minesweeper/mine-01.png \
+		../Minesweeper/sign-check-128_10x10.png \
 		../Minesweeper/bomb.mp3 \
 		../Minesweeper/highscores.txt
 	C:\Qt\5.8\mingw53_32\bin\rcc.exe -name recources ..\Minesweeper\recources.qrc -o debug\qrc_recources.cpp
@@ -481,6 +490,7 @@ debug/moc_mainwindow.cpp: C:/Qt/5.8/mingw53_32/include/QtWidgets/QMainWindow \
 		C:/Qt/5.8/mingw53_32/include/QtMultimedia/qaudio.h \
 		C:/Qt/5.8/mingw53_32/include/QtNetwork/qnetworkconfiguration.h \
 		../Minesweeper/highscore.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qmessagebox.h \
 		../Minesweeper/mainwindow.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.8/mingw53_32/bin/moc.exe
@@ -1210,6 +1220,7 @@ debug/main.o: ../Minesweeper/main.cpp ../Minesweeper/mainwindow.h \
 		C:/Qt/5.8/mingw53_32/include/QtMultimedia/qaudio.h \
 		C:/Qt/5.8/mingw53_32/include/QtNetwork/qnetworkconfiguration.h \
 		../Minesweeper/highscore.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qmessagebox.h \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/QApplication \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/qapplication.h \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/qdesktopwidget.h
@@ -1567,6 +1578,7 @@ debug/mainwindow.o: ../Minesweeper/mainwindow.cpp ../Minesweeper/mainwindow.h \
 		C:/Qt/5.8/mingw53_32/include/QtMultimedia/qaudio.h \
 		C:/Qt/5.8/mingw53_32/include/QtNetwork/qnetworkconfiguration.h \
 		../Minesweeper/highscore.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qmessagebox.h \
 		ui_mainwindow.h \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/QAction \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/qaction.h \
@@ -1618,7 +1630,6 @@ debug/mainwindow.o: ../Minesweeper/mainwindow.cpp ../Minesweeper/mainwindow.h \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/qgraphicswidget.h \
 		C:/Qt/5.8/mingw53_32/include/QtGui/QVector2D \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/QMessageBox \
-		C:/Qt/5.8/mingw53_32/include/QtWidgets/qmessagebox.h \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/QInputDialog \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/qinputdialog.h \
 		C:/Qt/5.8/mingw53_32/include/QtWidgets/qlineedit.h \

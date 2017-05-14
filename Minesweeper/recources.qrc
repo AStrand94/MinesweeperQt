@@ -1,13 +1,16 @@
 <RCC>
     <qresource prefix="/images">
-        <file>bomb.png</file>
-        <file>warning.png</file>
         <file>flag-01.png</file>
         <file>mine-01.png</file>
         <file>lost.png</file>
         <file>won.png</file>
         <file>MS_rules_controls.png</file>
         <file>MS_rules_controls_400x400.png</file>
+        <file>29_Sound_alt-128_10x10.png</file>
+        <file>30_Sound_off-128_10x10.png</file>
+        <file>sign-check-128_10x10.png</file>
+        <file>sign-off-128_10x10.png</file>
+        <file>help-128_10x10.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>bomb.mp3</file>

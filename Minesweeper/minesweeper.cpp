@@ -13,7 +13,6 @@ MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,
     allBombs = new Cell*[bombCount];
     this->rows = rows;
     this->cols = columns;
-
     this->size = cellSize;
     createBlankGrid();
     setNeighbours();

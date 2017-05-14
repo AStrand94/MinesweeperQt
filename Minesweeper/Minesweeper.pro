@@ -40,3 +40,5 @@ FORMS    += mainwindow.ui
 
 RESOURCES += \
     recources.qrc
+
+RC_FILE = minesweeper.rc

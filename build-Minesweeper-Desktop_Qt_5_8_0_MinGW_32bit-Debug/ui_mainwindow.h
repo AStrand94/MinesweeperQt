@@ -64,11 +64,22 @@ public:
         actionMute = new QAction(MainWindow);
         actionMute->setObjectName(QStringLiteral("actionMute"));
         actionMute->setCheckable(true);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/29_Sound_alt-128_10x10.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/images/30_Sound_off-128_10x10.png"), QSize(), QIcon::Normal, QIcon::On);
+        actionMute->setIcon(icon);
         actionImmortal = new QAction(MainWindow);
         actionImmortal->setObjectName(QStringLiteral("actionImmortal"));
         actionImmortal->setCheckable(true);
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/images/sign-off-128_10x10.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/images/sign-check-128_10x10.png"), QSize(), QIcon::Normal, QIcon::On);
+        actionImmortal->setIcon(icon1);
         actionGame_Rules_and_Controls = new QAction(MainWindow);
         actionGame_Rules_and_Controls->setObjectName(QStringLiteral("actionGame_Rules_and_Controls"));
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/images/help-128_10x10.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionGame_Rules_and_Controls->setIcon(icon2);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         centralWidget->setStyleSheet(QStringLiteral(""));
@@ -132,7 +143,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 600, 16));
+        menuBar->setGeometry(QRect(0, 0, 600, 44));
         menuBar->setStyleSheet(QLatin1String(" QMenuBar {\n"
 "     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,\n"
 "                                       stop:0 lightgray, stop:1 darkgray);\n"
