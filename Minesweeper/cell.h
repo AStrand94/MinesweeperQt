@@ -53,6 +53,7 @@ private:
     bool bomb = false;
     bool pressed = false;
     bool marked = false;
+    bool redBomb = true;
     void revealNeighbours();
     int bombSize;
     static MineSweeper* game;

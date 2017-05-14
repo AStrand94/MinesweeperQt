@@ -23,6 +23,7 @@ void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         drawMarkedCell(painter);
     }else if(pressed){
         if(bomb){
+            //if(redBomb)drawTheBomb(painter); //makes bombCells blink when first bomb is pressed when !immortalMode
             drawBomb(painter);
         }else{
             drawClickedCell(painter);
@@ -46,10 +47,12 @@ void Cell::drawMarkedCell(QPainter* painter){
 
 void Cell::drawBomb(QPainter* painter){
     QBrush brush = Qt::transparent;
+    if(redBomb)brush = Qt::red;
     painter->fillRect(boundingRect(), brush);
     QImage bmb(":/images/mine-01.png", 0);
     painter->drawImage(boundingRect(), bmb);
     painter->drawRect(boundingRect());
+    redBomb = false;
 }
 
 void Cell::drawClickedCell(QPainter* painter){
@@ -204,6 +207,7 @@ void Cell::reveal()
             if(game->getImmortalMode() == false) {
                 game->revealeAllBombs();
             } else {
+                redBomb = false;
                 game->updateTimer(10);
                 game->decreaseBombDisplayCount();
             }
