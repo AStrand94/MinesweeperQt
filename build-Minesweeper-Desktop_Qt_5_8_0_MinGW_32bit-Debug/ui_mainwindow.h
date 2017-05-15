@@ -33,7 +33,8 @@ class Ui_MainWindow
 public:
     QAction *actionMute;
     QAction *actionImmortal;
-    QAction *actionGame_Rules_and_Controls;
+    QAction *actionGame_Rules;
+    QAction *actionGame_Controls;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QGraphicsView *graphicsView;
@@ -75,11 +76,16 @@ public:
         icon1.addFile(QStringLiteral(":/images/sign-off-128_10x10.png"), QSize(), QIcon::Normal, QIcon::Off);
         icon1.addFile(QStringLiteral(":/images/sign-check-128_10x10.png"), QSize(), QIcon::Normal, QIcon::On);
         actionImmortal->setIcon(icon1);
-        actionGame_Rules_and_Controls = new QAction(MainWindow);
-        actionGame_Rules_and_Controls->setObjectName(QStringLiteral("actionGame_Rules_and_Controls"));
+        actionGame_Rules = new QAction(MainWindow);
+        actionGame_Rules->setObjectName(QStringLiteral("actionGame_Rules"));
         QIcon icon2;
         icon2.addFile(QStringLiteral(":/images/help-128_10x10.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionGame_Rules_and_Controls->setIcon(icon2);
+        actionGame_Rules->setIcon(icon2);
+        actionGame_Controls = new QAction(MainWindow);
+        actionGame_Controls->setObjectName(QStringLiteral("actionGame_Controls"));
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/images/controller.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionGame_Controls->setIcon(icon3);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         centralWidget->setStyleSheet(QStringLiteral(""));
@@ -179,7 +185,8 @@ public:
         menuBar->addAction(menuOptions->menuAction());
         menuSound->addAction(actionMute);
         menuSound->addAction(actionImmortal);
-        menuOptions->addAction(actionGame_Rules_and_Controls);
+        menuOptions->addAction(actionGame_Rules);
+        menuOptions->addAction(actionGame_Controls);
 
         retranslateUi(MainWindow);
 
@@ -195,7 +202,8 @@ public:
         actionImmortal->setToolTip(QApplication::translate("MainWindow", "Immortal", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         actionImmortal->setShortcut(QApplication::translate("MainWindow", "Ctrl+I", Q_NULLPTR));
-        actionGame_Rules_and_Controls->setText(QApplication::translate("MainWindow", "Game Rules and Controls", Q_NULLPTR));
+        actionGame_Rules->setText(QApplication::translate("MainWindow", "Game Rules", Q_NULLPTR));
+        actionGame_Controls->setText(QApplication::translate("MainWindow", "Controls", Q_NULLPTR));
         clearButton->setText(QApplication::translate("MainWindow", "New Game", Q_NULLPTR));
         pauseButton->setText(QApplication::translate("MainWindow", "Pause", Q_NULLPTR));
         highscoreButton->setText(QApplication::translate("MainWindow", "Highscores", Q_NULLPTR));

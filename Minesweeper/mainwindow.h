@@ -38,7 +38,8 @@ private slots:
     void on_gamePauseShortcutPressed();
     void on_actionMute_triggered();
     void on_actionImmortal_triggered();
-    void on_actionGame_Rules_and_Controls_triggered();
+    void on_actionGame_Rules_triggered();
+    void on_actionGame_Controls_triggered();
     void setButtonText(int);
 
     void decreaseBombDisplayCount();

@@ -334,7 +334,6 @@ void MainWindow::on_actionMute_triggered()
 
 void MainWindow::on_actionImmortal_triggered(){
     QMessageBox msg;
-    timer->stop();
     if(!immortal)ui->actionImmortal->setChecked(true);//new game
     immortal = true;
     if(ui->actionImmortal->isChecked()) {
@@ -347,15 +346,35 @@ void MainWindow::on_actionImmortal_triggered(){
         msg.setText("Immortal Mode OFF!\n\nBombs will kill you!");
         //ui->actionImmortal->setChecked(true);
     }
-    if(msg.exec())timer->start();
+    msg.exec();
 }
 
-void MainWindow::on_actionGame_Rules_and_Controls_triggered(){
-    timer->stop();
+void MainWindow::on_actionGame_Rules_triggered(){
     QMessageBox msg;
-    msg.setIconPixmap(QPixmap(":/images/Rules_Controls_2_400x400.png"));
+    msg.setIconPixmap(QPixmap(":/images/MS_rules_controls_2-01-01.png"));
     msg.setWindowModality(Qt::WindowModal);
-    if(msg.exec())timer->start();
+    if(timer->isActive()){
+        timer->stop();
+        scene->setForegroundBrush(QBrush(Qt::darkGray, Qt::SolidPattern));
+        if(msg.exec()){
+            timer->start();
+            scene->setForegroundBrush(Qt::NoBrush);
+        }
+    }else msg.exec();
+}
+
+void MainWindow::on_actionGame_Controls_triggered(){
+    QMessageBox msg;
+    msg.setIconPixmap(QPixmap(":/images/MS_rules_controls_2-03-01.png"));
+    msg.setWindowModality(Qt::WindowModal);
+    if(timer->isActive()){
+        timer->stop();
+        scene->setForegroundBrush(QBrush(Qt::darkGray, Qt::SolidPattern));
+        if(msg.exec()){
+            timer->start();
+            scene->setForegroundBrush(Qt::NoBrush);
+        }
+    }else msg.exec();
 }
 
 //actionGame_Rules_and_Controls

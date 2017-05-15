@@ -11,6 +11,9 @@
         <file>help-128_10x10.png</file>
         <file>Rules_Controls_2.png</file>
         <file>Rules_Controls_2_400x400.png</file>
+        <file>controller.png</file>
+        <file>MS_rules_controls_2-01-01.png</file>
+        <file>MS_rules_controls_2-03-01.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>bomb.mp3</file>

@@ -154,7 +154,8 @@
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionGame_Rules_and_Controls"/>
+    <addaction name="actionGame_Rules"/>
+    <addaction name="actionGame_Controls"/>
    </widget>
    <addaction name="menuSound"/>
    <addaction name="menuOptions"/>
@@ -200,13 +201,22 @@
     <string>Ctrl+I</string>
    </property>
   </action>
-  <action name="actionGame_Rules_and_Controls">
+  <action name="actionGame_Rules">
    <property name="icon">
     <iconset resource="recources.qrc">
      <normaloff>:/images/help-128_10x10.png</normaloff>:/images/help-128_10x10.png</iconset>
    </property>
    <property name="text">
-    <string>Game Rules and Controls</string>
+    <string>Game Rules</string>
+   </property>
+  </action>
+  <action name="actionGame_Controls">
+   <property name="icon">
+    <iconset resource="recources.qrc">
+     <normaloff>:/images/controller.png</normaloff>:/images/controller.png</iconset>
+   </property>
+   <property name="text">
+    <string>Controls</string>
    </property>
   </action>
  </widget>
