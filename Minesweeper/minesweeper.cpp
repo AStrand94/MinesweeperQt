@@ -6,7 +6,6 @@
 
 MineSweeper::MineSweeper(QGraphicsScene *scene,int bombs, int rows, int columns,int cellSize)
 {
-    //if(bombs > rows*columns)   --->>> THROW EXCEPTION??
     if(bombs > rows*columns) bombs = rows*columns -1;
     this->scene = scene;
     this->bombCount = bombs;
@@ -99,7 +98,6 @@ void MineSweeper::createBlankGrid()
 
 void MineSweeper::setBombsAround(Cell* cell)
 {
-    //bombCount++;
     int bombIndex = 0;
 
     srand((unsigned int)time(0));
@@ -113,7 +111,6 @@ void MineSweeper::setBombsAround(Cell* cell)
         if(!grid[x][y]->isNeighbour(cell) && grid[x][y] != cell && !grid[x][y]->isBomb()){
             grid[x][y]->setBomb();
             qDebug() << "Incrementing: " << x << ", " << y;
-            //grid[x][y]->incrementNeighboursBombcount();
             allBombs[bombIndex++] = grid[x][y];
         }
     }

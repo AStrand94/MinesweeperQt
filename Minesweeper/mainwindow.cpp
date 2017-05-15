@@ -35,9 +35,6 @@ MainWindow::MainWindow(QWidget *parent) :
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_N), this, SLOT(on_clearButton_clicked()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_P), this, SLOT(on_gamePauseShortcutPressed()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this, SLOT(on_highscoreButton_clicked()));
-    //new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_I), this, SLOT(on_actionImmortal_triggered()));
-    //Ctrl+I added through QtDes., makes the actionImmortal check()/uncheck()
-
 }
 
 void MainWindow::setupConnections()
@@ -79,7 +76,6 @@ void MainWindow::createNewGame(int cols, int rows, int bombs){
     bombDisplayCount = bombs;
     immortal = false;
 
-    //must be same as in minesweeper.h, TODO link them
     cellSize = 20;
     game = new MineSweeper(scene, bombs, rows, cols,cellSize);
 
