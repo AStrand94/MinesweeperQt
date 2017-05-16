@@ -38,7 +38,6 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
-RESOURCES += \
-    recources.qrc
+RESOURCES += resources.qrc
 
 RC_FILE = minesweeper.rc
